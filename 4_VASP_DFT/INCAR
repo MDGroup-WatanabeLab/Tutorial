@@ -1,0 +1,15 @@
+# Basic parameters
+ISMEAR = 0
+SIGMA = 0.05
+LREAL = Auto
+ISYM = 0
+NELMIN = 4
+NELM = 100
+EDIFF = 1E-6
+ALGO = VeryFast
+PREC = Accurate
+
+# Not change position
+IBRION = -1
+
+      
