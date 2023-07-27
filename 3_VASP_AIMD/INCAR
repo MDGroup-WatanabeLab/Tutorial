@@ -1,0 +1,23 @@
+# Basic parameters
+ISMEAR = 0
+SIGMA = 0.05
+LREAL = Auto
+ISYM = 0
+NELMIN = 4
+NELM = 100
+EDIFF = 1E-6
+ALGO = VeryFast
+PREC = Accurate
+
+# MD
+IBRION = 0
+MDALGO = 3
+ISIF = 3
+TEBEG = 300
+TEEND = 300
+NSW = 50
+POTIM = 1.0
+Langevin_GAMMA = 10.0
+Langevin_GAMMA_L = 10.0
+
+      
