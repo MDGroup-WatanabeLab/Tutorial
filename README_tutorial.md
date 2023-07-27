@@ -106,6 +106,9 @@ POTCARは、
     0.000000000000E+00  0.000000000000E+00
     End of Dataset
 
-それでは、WinSCPで、次のようなディレクトリを作成しましょう。
+それでは、Teratermで、次のコマンドを入れましょう。
+
+    $ mkdir 3_VASP_AIMD
+
 
 ## 4. VASPでDFT計算
