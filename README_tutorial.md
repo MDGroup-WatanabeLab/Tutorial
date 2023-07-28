@@ -20,9 +20,13 @@ Linuxコマンドの練習もかねて、ターミナルで次のコマンドを
 
 準備ができたら、早速、下のチュートリアルに進みましょう。
 
-## 1. LAMMPSでMD計算
-　LAMMPSでMD計算を行います。MD計算とは、古典力学に基づき、運動方程式から原子の移動をシミュレーションする方法です。実際にやってみましょう。  
-　まず、入力ファイルを用意します。構造を作成するには、mdpythonのStructureから、所定のpythonプログラムが必要です。今回のチュートリアルでは、NaClの計算を行いたいので、「rocksalt.py」を次のコマンドでダウンロードしましょう。
+## 1. LAMMPSでMD計算  
+LAMMPSでMD計算を行います。MD計算とは、古典力学に基づき、運動方程式から原子の移動をシミュレーションする方法です。実際にやってみましょう。  
+まず、入力となる構造を用意します。次のコマンドで、ディレクトリを移動します。
+
+    $ cd 1_LAMMPS_run
+
+構造を作成するには、mdpythonのStructureから、所定のpythonプログラムが必要です。今回のチュートリアルでは、NaClの計算を行いたいので、「rocksalt.py」を次のコマンドでダウンロードしましょう。
 
     $ git clone https://github.com/MDGroup-WatanabeLab/mdpython/blob/main/Structure/rocksalt.py
 
@@ -69,8 +73,72 @@ Linuxコマンドの練習もかねて、ターミナルで次のコマンドを
     3 : POSCAR
     Which format do you want to convert to ? :
 
-2を押せば、lmp形式に変換できます。名前は好きにしてください。
+2を押せば、lmp形式に変換できます。名前は好きにしてください。  
+すでに必要なファイルはすべて用意できているはずなので、
 
+    $ ls
+
+で、ディレクトリ内のファイルを確認しましょう。  
+おそらく、「in.amorphous.NaCl」というファイルがあると思います。  
+中身は・・・
+
+    package      omp 120
+    units        metal
+    boundary     p p p
+    atom_style   charge
+    atom_modify  sort 10000 1.0
+    read_data    NaCl444.lmp
+    pair_style   born/coul/long/omp 10.0
+    kspace_style ewald 1e-5
+    pair_coeff   1 1 0.013747 0.3170 3.300 1.036 0 10.0
+    pair_coeff   1 2 0.013747 0.3170 3.610 3.109 0 10.0
+    pair_coeff   2 2 0.013747 0.3170 3.920 9.328 0 10.0
+    neighbor     4.0 bin
+    neigh_modify every 1 delay 0 check yes
+    timestep     0.0001
+    velocity     all create 300 318796474 mom yes rot yes dist gaussian
+    thermo_style custom step temp ke pe etotal press vol density
+    thermo       1000
+    fix          1 all nve
+    fix          2 all box/relax aniso 0.0 fixedpoint 0.0 0.0 0.0
+    min_style    cg
+    minimize     1e-25 1e-25 50000 100000
+    dump         1 all custom 1 stable.final id type xs ys zs
+    dump_modify  1 sort id
+    run          0
+    undump       1
+    unfix        1
+    unfix        2
+
+    dump         1 all xyz 100 nacl_amorphous.xyz
+    dump_modify  1 sort id element Na Cl append yes
+    fix          1 all nvt temp 300 300 0.05
+    run          10000
+    unfix        1
+    fix          1 all nvt temp 2000 2000 0.05
+    run          100000
+    unfix        1
+    fix          1 all npt temp 2000 300 0.05 x 0 0 0.05 y 0 0 0.05 z 0 0 0.05
+    run          50000
+    unfix        1
+    dump         2 all custom 1 amorphous.final id type xs ys zs
+    dump_modify  2 sort id
+    run          0
+    undump       2
+    undump       1
+
+となっています。非常に長いですが、頑張って読みましょう。  
+インターネットで「LAMMPS Manual」で検索し、どのパラメータが何を表しているか調べて、今から行う計算の意味を考えましょう。
+
+さて、このファイルでは、一行だけ自分で変えなければならない部分があります。わかりますか？  
+
+わかったら、その部分を変え、計算を始めましょう。次のコマンドを実行します。
+
+    $ g++ rocksalt.cpp
+
+    $ nohup ./a.out &
+
+正常に動作すれば、「nohup.out」に出力結果が書き込まれます。終わるまで待ちましょう。amorphous.final が生成されたらオッケーです。
 
 ## 2. LAMMPSで一点計算
 
