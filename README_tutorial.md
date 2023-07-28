@@ -11,10 +11,10 @@ Linuxコマンドの練習もかねて、ターミナルで次のコマンドを
 
     $ mkdir Tutorial
     $ cd Tutorial
-    $ mkdir 1_LAMMPS_run
-    $ mkdir 2_LAMMPS_run0
-    $ mkdir 3_VASP_AIMD
-    $ mkdir 4_VASP_DFT
+    $ git clone https://github.com/MDGroup-WatanabeLab/Tutorial/1_LAMMPS_run
+    $ git clone https://github.com/MDGroup-WatanabeLab/Tutorial/2_LAMMPS_run0
+    $ git clone https://github.com/MDGroup-WatanabeLab/Tutorial/3_VASP_AIMD
+    $ git clone https://github.com/MDGroup-WatanabeLab/Tutorial/4_VASP_DFT
 
 
 
@@ -70,6 +70,7 @@ Linuxコマンドの練習もかねて、ターミナルで次のコマンドを
     Which format do you want to convert to ? :
 
 2を押せば、lmp形式に変換できます。名前は好きにしてください。
+
 
 ## 2. LAMMPSで一点計算
 
