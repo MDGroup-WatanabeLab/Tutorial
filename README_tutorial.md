@@ -21,6 +21,55 @@ Linuxコマンドの練習もかねて、ターミナルで次のコマンドを
 準備ができたら、早速、下のチュートリアルに進みましょう。
 
 ## 1. LAMMPSでMD計算
+　LAMMPSでMD計算を行います。MD計算とは、古典力学に基づき、運動方程式から原子の移動をシミュレーションする方法です。実際にやってみましょう。  
+　まず、入力ファイルを用意します。構造を作成するには、mdpythonのStructureから、所定のpythonプログラムが必要です。今回のチュートリアルでは、NaClの計算を行いたいので、「rocksalt.py」を次のコマンドでダウンロードしましょう。
+
+    $ git clone https://github.com/MDGroup-WatanabeLab/mdpython/blob/main/Structure/rocksalt.py
+
+ダウンロード出来たら、早速実行しましょう。
+
+    $ python rocksalt.py
+
+選択肢が出てくるので、
+
+    Select atoms from following:
+    0 : GST
+    1 : NaCl
+    2 : MgO
+    3 : CaO
+    4 : GeTe with vacancy (1/10)
+    5 : SbTe with vacancy for Sb:Te=2:3
+    6 : GeSb with vacancy (1/10)
+    7 : GeTe
+    8 : SbTe
+    9 : GeSb
+    Input number :
+
+1を入力してEnterを押したら、「NaCl」が選択出来ます。すると、
+
+    Please input the lattice size [ x, y, z ] :
+
+とでるので、
+
+    >> 4 4 4
+
+と打てば（>>は不要）、NaClの構造がPOSCAR形式で作成できます。しかし、これから行うLAMMPSの計算では、mdl形式やlmp形式が必要です。ですので、ファイル形式を変換する必要があります。次のコマンドで、ファイルコンバーターをダウンロードしましょう。
+
+    $ git clone https://github.com/MDGroup-WatanabeLab/mdpython/blob/main/Converter/convert_file.py 
+
+コンバーターを次のコマンドで実行しましょう。
+
+    $ python convert_file.py
+
+すると、POSCARが選択肢として出てくるはずです。0をおして、選択しましょう。どのファイル形式にするか聞かれるので、
+
+    0 : mdl
+    1 : xyz
+    2 : lmp
+    3 : POSCAR
+    Which format do you want to convert to ? :
+
+2を押せば、lmp形式に変換できます。名前は好きにしてください。
 
 ## 2. LAMMPSで一点計算
 
