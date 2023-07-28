@@ -4,8 +4,8 @@ Linuxコマンドの練習もかねて、ターミナルで次のコマンドを
 
     $ mkdir Tutorial
     $ cd Tutorial
-    $ git clone https://github.com/MDGroup-WatanabeLab/Tutorial/1_LAMMPS_run
-    $ git clone https://github.com/MDGroup-WatanabeLab/Tutorial/2_LAMMPS_run0
+    $ git clone https://github.com/MDGroup-WatanabeLab/Tutorial/1_lammps_run
+    $ git clone https://github.com/MDGroup-WatanabeLab/Tutorial/2_mdpython 
     $ git clone https://github.com/MDGroup-WatanabeLab/Tutorial/3_VASP_AIMD
     $ git clone https://github.com/MDGroup-WatanabeLab/Tutorial/4_VASP_DFT
 
@@ -17,7 +17,7 @@ Linuxコマンドの練習もかねて、ターミナルで次のコマンドを
 LAMMPSでMD計算を行います。MD計算とは、古典力学に基づき、運動方程式から原子の移動をシミュレーションする方法です。実際にやってみましょう。  
 まず、入力となる構造を用意します。次のコマンドで、ディレクトリを移動します。
 
-    $ cd 1_LAMMPS_run
+    $ cd 1_lammps_run
 
 構造を作成するには、mdpythonのStructureから、所定のpythonプログラムが必要です。今回のチュートリアルでは、NaClの計算を行いたいので、「rocksalt.py」を次のコマンドでダウンロードしましょう。
 
@@ -133,7 +133,16 @@ LAMMPSでMD計算を行います。MD計算とは、古典力学に基づき、�
 
 正常に動作すれば、「nohup.out」に出力結果が書き込まれます。終わるまで待ちましょう。amorphous.final が生成されたらオッケーです。
 
-## 2. LAMMPSで一点計算
+## 2. mdpythonを編集する  
+先ほど、「rocksalt.py」を使ってもらいましたが、このプログラムは計算班が作成した「mdpython」というプログラム群の一つです。特級呪物にならないよう、追記や作成の仕方を確認しましょう。
+
+    $ cd 2_mdpython
+
+で移動しましょう。「bcc.py」と「fcc.py」という、二つのファイルがあると思います。この二つのファイルを開き、どのような処理を行っているか見てみましょう。  
+それでは、「bcc.py」に __リチウム（Li, a = 3.491 angs）__ 、「fcc.py」に __カルシウム（Ca, a = 5.81 angs）__ の構造を作成できるように、プログラムを追記しましょう。  
+コードが完成したら、実行し、エラー処理しつつ完成させましょう。
+
+
 
 ## 3. VASPで第一原理MD
 　VASPで第一原理MDを行います。第一原理MDとは、簡単に言うと、正確だが遅い第一原理計算と、精度は悪いが速いMD計算を組み合わせた計算方法です。実際にやってみましょう。  
