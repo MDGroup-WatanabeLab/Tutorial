@@ -19,9 +19,9 @@
 $`n`$個のデータ$`(x_1,y_1),(x_2,y_2),...,(x_n,y_n)`$に対し、<br>
 回帰式$`y(x) = ax + b`$に回帰する。<br>
 i番目のデータの回帰式との誤差は<br>
-$$
+```math
 \varepsilon_i = y_i - (ax_i + b)
-$$<br>
+```<br>
 その二乗和(誤差関数)は<br>
 $$
 \displaystyle S=\sum^{n}_{i=1} {\varepsilon_i}^2=\sum^{n}_{i=1} \{y_i - (ax_i + b)\}^2
