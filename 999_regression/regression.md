@@ -23,11 +23,11 @@ i番目のデータの回帰式との誤差は<br>
 \varepsilon_i = y_i - (ax_i + b)
 ```
 その二乗和(誤差関数)は<br>
-$$
+```math
 \displaystyle S=\sum^{n}_{i=1} {\varepsilon_i}^2=\sum^{n}_{i=1} \{y_i - (ax_i + b)\}^2
-$$<br>
+```
 でなんやかんやすると、直接パラメータ$`a`$と$`b`$が出せる。<br>
-$$
+```math
 \left.
     \begin{matrix}
         a = \frac{
@@ -44,32 +44,32 @@ $$
         }
     \end{matrix}
 \right\}
-$$<br>
+```
 これが最小二乗法による単回帰のやり方である。<br>
 
 ### 最小二乗法の導出
 改めて二乗和(誤差関数)は<br>
-$$
+```math
 \displaystyle S=\sum^{n}_{i=1} {\varepsilon_i}^2=\sum^{n}_{i=1} \{y_i - (ax_i + b)\}^2
-$$<br>
+```
 こいつをパラメータ$a,b$でそれぞれ偏微分すると<br>
-$$
+```math
 \displaystyle \frac{\partial S}{\partial a} = \sum^{n}_{i=1} 2\{y_i - (ax_i + b)\}(-x_i)=-2\sum^{n}_{i=1} x_i\{y_i - (ax_i + b)\}
 $$<br>
 $$
 \displaystyle \frac{\partial S}{\partial b} = \sum^{n}_{i=1} 2\{y_i - (ax_i + b)\}(-1)=-2\sum^{n}_{i=1} \{y_i - (ax_i + b)\}
-$$<br>
+```
 偏微分が0のとき、最小やろ！の精神(最適解に近づくとSは減少傾向)で連立すると<br>
-$$
+```math
 \left.
     \begin{matrix}
           \displaystyle -2\sum^{n}_{i=1} x_i\{y_i - (ax_i + b)\}=0 \cr
           \displaystyle -2\sum^{n}_{i=1} \{y_i - (ax_i + b)\}=0
     \end{matrix}
 \right\}
-$$<br>
+```
 上の式を整理していくｩ<br>
-$$
+```math
 begin{aligned}
     \displaystyle -2\sum^{n}_{i=1} x_i\{y_i - (ax_i + b)\} &= 0 \cr
     \sum^{n}_{i=1} x_i\{y_i-(ax_i + b)\} &= 0 \cr
@@ -78,9 +78,9 @@ begin{aligned}
     \sum^{n}_{i=1} x_iy_i &= \sum^{n}_{i=1} (a{x_i}^2 + bx_i) \cr
     &= a \sum^{n}_{i=1} {x_i}^2 + b\sum^{n}_{i=1} {x_i}
 \end{aligned}
-$$<br>
+```
 下の式を整理していくｩ<br>
-$$
+```math
 \begin{aligned}
     \displaystyle -2 \sum^{n}_{i=1} \{y_i - (ax_i + b)\} &= 0 \cr
     \sum^{n}_{i=1} \{y_i - (ax_i + b)\} &= 0 \cr
@@ -88,22 +88,22 @@ $$
     \sum^{n}_{i=1} y_i &= \sum^{n}_{i=1} (ax_i + b) \cr
     &=  a\sum^{n}_{i=1} {x_i} + nb
 \end{aligned}
-$$<br>
+```
 ということで整理された連立方程式はこちら<br>
-$$
+```
 \left.
     \begin{matrix}
         \displaystyle \sum^{n}_{i=1} x_iy_i = a\sum^{n}_{i=1} {x_i}^2 + b\sum^{n}_{i=1} {x_i} \cr
         \displaystyle \sum^{n}_{i=1} y_i = a\sum^{n}_{i=1} {x_i} + nb
     \end{matrix}
 \right\}
-$$<br>
+```
 下の式から$`b`$をもとめて<br>
-$$
+```math
 \displaystyle b = \frac{\displaystyle \sum^{n}_{i=1} y_i - a\sum^{n}_{i=1} {x_i}}{n}
-$$<br>
+```
 上の式にぶち込む<br>
-$$
+```math
 \begin{aligned}
     \displaystyle \sum^{n}_{i=1} x_iy_i &= a\sum^{n}_{i=1} {x_i}^2 + \frac{
         \displaystyle \sum^{n}_{i=1} y_i - a\sum^{n}_{i=1} {x_i}
@@ -123,9 +123,9 @@ $$
         (\displaystyle \sum^{n}_{i=1} x_i)^2 - n\sum^{n}_{i=1} {x_i}^2
     }
 \end{aligned}
-$$<br>
+```
 $b$の式にぶち込んで<br>
-$$
+```math
 \begin{aligned}
      b &= \frac{
         \displaystyle \sum^{n}_{i=1} y_i - \frac{
@@ -172,22 +172,22 @@ $$
         (\displaystyle \sum^{n}_{i=1} x_i)^2 - n\sum^{n}_{i=1} {x_i}^2
     }
 \end{aligned}
-$$<br>
+```
 
 ### 最小二乗法と統計学的指標との関係
 分散公式は以下の通り<br>
-$$
+```math
 \displaystyle \sigma_x^2 = \bar{x^2} - \bar{x}^2 = \frac{1}{n} \sum^n_{i=1} {x_i}^2 - (\frac{1}{n} \sum^n_{i=1} x_i)^2
-$$<br>
+```
 ただし$`\bar{x}`$は$`x`$の平均で、$`\bar{x^2}`$は$`x`$の二乗平均<br>
 また共分散公式は以下の通り<br>
-$$
+```math
 \displaystyle \sigma_{xy} = \bar{xy} - \bar{x}\bar{y} = \frac{1}{n} \sum^n_{i=1} {x_i}{y_i} - (\frac{1}{n} \sum^n_{i=1} x_i)(\frac{1}{n} \sum^n_{i=1} y_i)
-$$<br>
+```
 ただし$`\bar{x}`$は$`x`$の平均で、$`\bar{y}`$は$`y`$の平均、$`\bar{xy}`$は$`xy`$の平均<br>
 
 **以上の公式を踏まえて**もっかい最小二乗法の$a$と$b$の式を見てみる。<br>
-$$
+```math
 \left.
     \begin{matrix}
         a = \frac{
@@ -205,11 +205,11 @@ $$
         = \frac{\displaystyle \sum^{n}_{i=1} y_i - a\sum^{n}_{i=1} {x_i}}{n}
     \end{matrix}
 \right\}
-$$<br>
+```
 
 **なんか似てね？**<br>
 $`a`$について<br>
-$$
+```math
 \begin{aligned}
     a &= \frac{
         \displaystyle \sum^{n}_{i=1} x_i \sum^{n}_{i=1} y_i - n\sum^{n}_{i=1} x_iy_i
@@ -230,15 +230,15 @@ $$
         \sigma_x^2 
     } \cr
 \end{aligned}
-$$<br>
+```
 $`b`$について<br>
-$$
+```math
 \begin{aligned}
     b &= \frac{\displaystyle \sum^{n}_{i=1} y_i - a\sum^{n}_{i=1} {x_i}}{n} \cr
     &= \frac{1}{n}\sum^{n}_{i=1} y_i - a\frac{1}{n}\sum^{n}_{i=1} {x_i} \cr
     &= \bar{y} - \frac{\sigma_{xy}}{\sigma_x^2} \bar{x}
 \end{aligned}
-$$<br>
+```
 といった感じで、すっきりした見た目にすることができる。<br>
 
 ## 重回帰(最小二乗法の応用)
@@ -247,34 +247,34 @@ $$<br>
 
 $`n`$個のデータ$`(x_1,w_1,y_1),(x_2,w_2,y_2),...,(x_n,w_n,y_n)`$に対し、<br>
 今回は回帰式$`y=ax+bw+c`$に回帰する。<br>
-$$
+```math
 \varepsilon_i = y_i - (ax_i + bw_i + c)
-$$<br>
+```
 その二乗和(誤差関数)は<br>
-$$
+```math
 \displaystyle S=\sum^{n}_{i=1} {\varepsilon_i}^2=\sum^{n}_{i=1} \{y_i - (ax_i + bw_i + c)\}^2
-$$<br>
+```
 でなんやかんやすると、直接パラメータ$`a`$、$`b`$と$`c`$が出せる。<br>
 
 WIP<br>
 
 ### 重回帰分析の導出
 改めて二乗和(誤差関数)は<br>
-$$
+```math
 \displaystyle S=\sum^{n}_{i=1} {\varepsilon_i}^2=\sum^{n}_{i=1} \{y_i - (ax_i + bw_i + c)\}^2
-$$<br>
+```
 こいつをパラメータ$`a,b,c`$でそれぞれ偏微分すると<br>
-$$
+```math
 \displaystyle \frac{\partial S}{\partial a} = \sum^{n}_{i=1} 2\{y_i - (ax_i + bw_i + c)\}(-x_i)=-2\sum^{n}_{i=1} x_i\{y_i - (ax_i + bw_i + c)\}
-$$<br>
-$$
+```
+```math
 \displaystyle \frac{\partial S}{\partial b} = \sum^{n}_{i=1} 2\{y_i - (ax_i + bw_i + c)\}(-w_i)=-2\sum^{n}_{i=1} w_i\{y_i - (ax_i + bw_i + c)\}
-$$<br>
-$$
+```
+```math
 \displaystyle \frac{\partial S}{\partial c} = \sum^{n}_{i=1} 2\{y_i - (ax_i + bw_i + c)\}(-1)=-2\sum^{n}_{i=1} \{y_i - (ax_i + bw_i + c)\}
-$$<br>
-偏微分が0のとき、最小やろ！の精神(最適解に近づくとSは減少傾向)で連立すると<br>
-$$
+```
+偏微分が0のとき、最小やろ！の精神(最適解に近づくと$`S`$は減少傾向)で連立すると<br>
+```math
 \left.
     \begin{matrix}
           \displaystyle -2\sum^{n}_{i=1} x_i\{y_i - (ax_i + bw_i + c)\} = 0 \cr
@@ -282,9 +282,9 @@ $$
           \displaystyle -2\sum^{n}_{i=1} \{y_i - (ax_i + bw_i + c)\} = 0
     \end{matrix}
 \right\}
-$$<br>
+```
 上の式を整理していくｩ<br>
-$$
+```math
 \begin{aligned}
     \displaystyle -2\sum^{n}_{i=1} x_i\{y_i - (ax_i + bw_i + c)\} &= 0 \cr
     \sum^{n}_{i=1} x_i\{y_i - (ax_i + bw_i + c)\} &= 0 \cr
@@ -293,9 +293,9 @@ $$
     \sum^{n}_{i=1} x_iy_i &= \sum^{n}_{i=1} (a{x_i}^2 + bw_ix_i + cx_i)\cr
     &= a\sum^{n}_{i=1} {x_i}^2 + b\sum^{n}_{i=1} w_ix_i + c\sum^{n}_{i=1} x_i
 \end{aligned}
-$$<br>
+```
 真ん中の式を整理していくｩ<br>
-$$
+```math
 \begin{aligned}
     \displaystyle -2\sum^{n}_{i=1} w_i\{y_i - (ax_i + bw_i + c)\} &= 0 \cr
     \sum^{n}_{i=1} w_i\{y_i - (ax_i + bw_i + c)\} &= 0 \cr
@@ -304,9 +304,9 @@ $$
     \sum^{n}_{i=1} w_iy_i &= \sum^{n}_{i=1} (aw_ix_i + b{w_i}^2 + cw_i) \cr
     &= a\sum^{n}_{i=1} w_ix_i + b\sum^{n}_{i=1} {w_i}^2 + c\sum^{n}_{i=1} w_i
 \end{aligned}
-$$<br>
+```
 下の式を整理していくｩ<br>
-$$
+```math
 \begin{aligned}
     \displaystyle -2\sum^{n}_{i=1} \{y_i - (ax_i + bw_i + c)\} &= 0 \cr
     \sum^{n}_{i=1} \{y_i - (ax_i + bw_i + c)\} &= 0 \cr
@@ -314,9 +314,9 @@ $$
     \sum^{n}_{i=1} y_i &= \sum^{n}_{i=1} (ax_i + bw_i + c) \cr
     &= a\sum^{n}_{i=1} x_i + b\sum^{n}_{i=1} w_i + nc
 \end{aligned}
-$$<br>
+```
 ということで整理された連立方程式はこちら<br>
-$$
+```math
 \left.
     \begin{matrix}
         \displaystyle \sum^{n}_{i=1} x_iy_i = a\sum^{n}_{i=1} {x_i}^2 + b\sum^{n}_{i=1} w_ix_i + c\sum^{n}_{i=1} x_i \cr
@@ -324,13 +324,13 @@ $$
         \displaystyle \sum^{n}_{i=1} y_i = a\sum^{n}_{i=1} x_i + b\sum^{n}_{i=1} w_i + nc
     \end{matrix}
 \right\}
-$$<br>
+```
 下の式から$`c`$をもとめて<br>
-$$
+```math
 \displaystyle c = \frac{\displaystyle \sum^{n}_{i=1} y_i - a\sum^{n}_{i=1} {x_i} - b\sum^{n}_{i=1} {w_i}}{n}
-$$<br>
-真ん中の式にぶち込んで$b$を求める<br>
-$$
+```
+真ん中の式にぶち込んで$`b`$を求める<br>
+```math
 \begin{aligned}
     \displaystyle \sum^{n}_{i=1} w_iy_i &= a\sum^{n}_{i=1} w_ix_i + b\sum^{n}_{i=1} {w_i}^2 + (\frac{\displaystyle \sum^{n}_{i=1} y_i - a\sum^{n}_{i=1} {x_i} - b\sum^{n}_{i=1} {w_i}}{n})\sum^{n}_{i=1} w_i \cr
     \displaystyle \sum^{n}_{i=1} w_iy_i &= a\sum^{n}_{i=1} w_ix_i + b\sum^{n}_{i=1} {w_i}^2 + \frac{1}{n}\sum^{n}_{i=1} w_i\sum^{n}_{i=1} y_i - \frac{a}{n} \sum^{n}_{i=1} w_i\sum^{n}_{i=1} x_i - \frac{b}{n} (\sum^{n}_{i=1} w_i)^2 \cr
@@ -342,7 +342,7 @@ $$
         \displaystyle \frac{1}{n} (\sum^{n}_{i=1} w_i)^2 - 1\sum^{n}_{i=1} {w_i}^2
     }
 \end{aligned}
-$$<br>
+```
 
 ### 重回帰分析における統計学的指標との関係
 
