@@ -191,18 +191,18 @@ $`b`$の式にぶち込んで<br>
 ```
 ただし$`\bar{x}`$は$`x`$の平均で、$`\bar{y}`$は$`y`$の平均、$`\bar{xy}`$は$`xy`$の平均<br>
 
-**以上の公式を踏まえて**もっかい最小二乗法の$a$と$b$の式を見てみる。<br>
+**以上の公式を踏まえて**もっかい最小二乗法の$`a`$と$`b`$の式を見てみる。<br>
 ```math
 \left.
     \begin{matrix}
         a = \frac{
-        \displaystyle \sum^{n}_{i=1} x_i \sum^{n}_{i=1} y_i - n\sum^{n}_{i=1} x_iy_i
+            \displaystyle \sum^{n}_{i=1} x_i \sum^{n}_{i=1} y_i - n\sum^{n}_{i=1} x_iy_i
         }
         {
             (\displaystyle \sum^{n}_{i=1} x_i)^2 - n\sum^{n}_{i=1} {x_i}^2
         } \cr
         b = \frac{
-        \displaystyle \sum^{n}_{i=1} x_i\sum^{n}_{i=1} x_iy_i - \sum^{n}_{i=1} {x_i}^2 \sum^{n}_{i=1} y_i
+            \displaystyle \sum^{n}_{i=1} x_i\sum^{n}_{i=1} x_iy_i - \sum^{n}_{i=1} {x_i}^2 \sum^{n}_{i=1} y_i
         }
         {
             (\displaystyle \sum^{n}_{i=1} x_i)^2 - n\sum^{n}_{i=1} {x_i}^2
