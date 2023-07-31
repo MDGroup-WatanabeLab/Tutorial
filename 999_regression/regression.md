@@ -55,8 +55,8 @@ i番目のデータの回帰式との誤差は<br>
 こいつをパラメータ$a,b$でそれぞれ偏微分すると<br>
 ```math
 \displaystyle \frac{\partial S}{\partial a} = \sum^{n}_{i=1} 2\{y_i - (ax_i + b)\}(-x_i)=-2\sum^{n}_{i=1} x_i\{y_i - (ax_i + b)\}
-$$<br>
-$$
+```
+```math
 \displaystyle \frac{\partial S}{\partial b} = \sum^{n}_{i=1} 2\{y_i - (ax_i + b)\}(-1)=-2\sum^{n}_{i=1} \{y_i - (ax_i + b)\}
 ```
 偏微分が0のとき、最小やろ！の精神(最適解に近づくとSは減少傾向)で連立すると<br>
@@ -70,7 +70,7 @@ $$
 ```
 上の式を整理していくｩ<br>
 ```math
-begin{aligned}
+\begin{aligned}
     \displaystyle -2\sum^{n}_{i=1} x_i\{y_i - (ax_i + b)\} &= 0 \cr
     \sum^{n}_{i=1} x_i\{y_i-(ax_i + b)\} &= 0 \cr
     \sum^{n}_{i=1} x_i(y_i - ax_i - b) &= 0 \cr
@@ -90,7 +90,7 @@ begin{aligned}
 \end{aligned}
 ```
 ということで整理された連立方程式はこちら<br>
-```
+```math
 \left.
     \begin{matrix}
         \displaystyle \sum^{n}_{i=1} x_iy_i = a\sum^{n}_{i=1} {x_i}^2 + b\sum^{n}_{i=1} {x_i} \cr
@@ -124,7 +124,7 @@ begin{aligned}
     }
 \end{aligned}
 ```
-$b$の式にぶち込んで<br>
+$`b`$の式にぶち込んで<br>
 ```math
 \begin{aligned}
      b &= \frac{
