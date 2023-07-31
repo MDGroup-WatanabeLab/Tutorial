@@ -353,7 +353,11 @@ WIP<br>
 \begin{aligned}
     \displaystyle \sum^{n}_{i=1} x_iy_i &= a\sum^{n}_{i=1} {x_i}^2 + b\sum^{n}_{i=1} w_ix_i + \frac{\displaystyle \sum^{n}_{i=1} y_i - a\sum^{n}_{i=1} {x_i} - b\sum^{n}_{i=1} {w_i}}{n}\sum^{n}_{i=1} x_i \cr
     \sum^{n}_{i=1} x_iy_i &= a\sum^{n}_{i=1} {x_i}^2 + b\sum^{n}_{i=1} w_ix_i + \frac{1}{n} \sum^{n}_{i=1} x_i\sum^{n}_{i=1} y_i - \frac{a}{n}(\sum^{n}_{i=1} {x_i})^2 - \frac{b}{n}\sum^{n}_{i=1} {w_i}\sum^{n}_{i=1} x_i \cr
-    \sum^{n}_{i=1} x_iy_i &= \frac{1}{n} \sum^{n}_{i=1} x_i\sum^{n}_{i=1} y_i + a\{\sum^{n}_{i=1} {x_i}^2 - \frac{1}{n}(\sum^{n}_{i=1} {x_i})^2 \} + b(\sum^{n}_{i=1} w_ix_i - \frac{1}{n}\sum^{n}_{i=1} {w_i}\sum^{n}_{i=1} x_i) \cr
+    \sum^{n}_{i=1} x_iy_i &= \frac{1}{n} \sum^{n}_{i=1} x_i\sum^{n}_{i=1} y_i + a\{\sum^{n}_{i=1} {x_i}^2 - \frac{1}{n}(\sum^{n}_{i=1} {x_i})^2 \} + b(\sum^{n}_{i=1} w_ix_i - \frac{1}{n}\sum^{n}_{i=1} {w_i}\sum^{n}_{i=1} x_i)
+\end{aligned}
+```
+```math
+\begin{aligned}
     \sum^{n}_{i=1} x_iy_i &= \frac{1}{n} \sum^{n}_{i=1} x_i\sum^{n}_{i=1} y_i + a\{\sum^{n}_{i=1} {x_i}^2 - \frac{1}{n}(\sum^{n}_{i=1} {x_i})^2 \} + \frac{(\displaystyle \frac{1}{n}\sum^{n}_{i=1} w_i\sum^{n}_{i=1} y_i - \sum^{n}_{i=1} w_iy_i) + a(\sum^{n}_{i=1} w_ix_i - \frac{1}{n} \sum^{n}_{i=1} w_i\sum^{n}_{i=1} x_i)}{\displaystyle \frac{1}{n} (\sum^{n}_{i=1} w_i)^2 - 1\sum^{n}_{i=1} {w_i}^2}(\sum^{n}_{i=1} w_ix_i - \frac{1}{n}\sum^{n}_{i=1} {w_i}\sum^{n}_{i=1} x_i) \cr
     \sum^{n}_{i=1} x_iy_i &= \frac{1}{n} \sum^{n}_{i=1} x_i\sum^{n}_{i=1} y_i + a\{\sum^{n}_{i=1} {x_i}^2 - \frac{1}{n}(\sum^{n}_{i=1} {x_i})^2 \} + \frac{(\displaystyle \frac{1}{n}\sum^{n}_{i=1} w_i\sum^{n}_{i=1} y_i - \sum^{n}_{i=1} w_iy_i) (\sum^{n}_{i=1} w_ix_i - \frac{1}{n}\sum^{n}_{i=1} {w_i}\sum^{n}_{i=1} x_i) }{\displaystyle \frac{1}{n} (\sum^{n}_{i=1} w_i)^2 - 1\sum^{n}_{i=1} {w_i}^2}
     +\frac{\displaystyle a(\sum^{n}_{i=1} w_ix_i - \frac{1}{n} \sum^{n}_{i=1} w_i\sum^{n}_{i=1} x_i)(\sum^{n}_{i=1} w_ix_i - \frac{1}{n}\sum^{n}_{i=1} {w_i}\sum^{n}_{i=1} x_i)}{\displaystyle \frac{1}{n} (\sum^{n}_{i=1} w_i)^2 - 1\sum^{n}_{i=1} {w_i}^2} \cr
