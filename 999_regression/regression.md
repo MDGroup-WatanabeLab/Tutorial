@@ -140,6 +140,15 @@ $`b`$の式にぶち込んで<br>
     {
         n
     } \cr
+    b &= \frac{
+        \displaystyle \sum^{n}_{i=1} y_i}
+        {
+            n}
+     - \frac{
+        \displaystyle \sum^{n}_{i=1} x_i \sum^{n}_{i=1} y_i - n\sum^{n}_{i=1} x_iy_i}
+    {
+        n\{(\displaystyle \sum^{n}_{i=1} x_i)^2 - n\sum^{n}_{i=1} {x_i}^2\}} 
+    \sum^{n}_{i=1} {x_i} \cr
 \end{aligned}
 ```
 
