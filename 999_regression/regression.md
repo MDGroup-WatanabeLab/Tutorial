@@ -128,7 +128,18 @@ $`b`$の式にぶち込んで<br>
 
 ```math
 \begin{aligned}
-     u+n+k+o
+    b &= \frac{
+        \displaystyle \sum^{n}_{i=1} y_i - \frac{
+            \displaystyle \sum^{n}_{i=1} x_i \sum^{n}_{i=1} y_i - n\sum^{n}_{i=1} x_iy_i
+        }
+        {
+            (\displaystyle \sum^{n}_{i=1} x_i)^2 - n\sum^{n}_{i=1} {x_i}^2
+        }
+         \sum^{n}_{i=1} {x_i}
+    }
+    {
+        n
+    } \cr
 \end{aligned}
 ```
 
