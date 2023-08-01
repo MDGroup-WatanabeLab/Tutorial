@@ -5,7 +5,7 @@
     $ cd [作成したディレクトリ名]
 
 
-Linuxコマンドの練習もかねて、ターミナルで次のコマンドを打つことで、チュートリアル用のディレクトリが作成されます。。
+Linuxコマンドの練習もかねて、ターミナルで次のコマンドを打つことで、チュートリアル用のディレクトリが作成されます。
 
     $ git clone https://github.com/MDGroup-WatanabeLab/Tutorial.git
 
@@ -148,7 +148,11 @@ q キーで元の画面に戻ります。次のコマンドを実行します。
 
     $ nohup mpirun -np 16 lmp_mpi < in.amorphous.NaCl &
 
-正常に動作すれば、「nohup.out」に出力結果が書き込まれます。終わるまで待ちましょう。amorphous.final が生成されたらオッケーです。
+正常に動作すれば、「nohup.out」に出力結果が書き込まれます。終わるまで待ちましょう。amorphous.final が生成されたらオッケーです。しかし、このままでは結晶が本当にアモルファス化しているかわかりません。ファイル形式を変更し、VESTAで見られるようにしましょう。再び、
+
+    $ python convert_file.py
+
+で、xyz形式に変更し、VESTAで見てみましょう。
 
 
 ## 3. VASPでDFT計算  
