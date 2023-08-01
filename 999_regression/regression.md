@@ -351,12 +351,12 @@ WIP<br>
 \begin{aligned}
     \displaystyle \sum^{n}_{i=1} w_iy_i &= a\sum^{n}_{i=1} w_ix_i + b\sum^{n}_{i=1} {w_i}^2 + (\frac{\displaystyle \sum^{n}_{i=1} y_i - a\sum^{n}_{i=1} {x_i} - b\sum^{n}_{i=1} {w_i}}{n})\sum^{n}_{i=1} w_i \cr
     \displaystyle \sum^{n}_{i=1} w_iy_i &= a\sum^{n}_{i=1} w_ix_i + b\sum^{n}_{i=1} {w_i}^2 + \frac{1}{n}\sum^{n}_{i=1} w_i\sum^{n}_{i=1} y_i - \frac{a}{n} \sum^{n}_{i=1} w_i\sum^{n}_{i=1} x_i - \frac{b}{n} (\sum^{n}_{i=1} w_i)^2 \cr
-    \displaystyle b\{ \frac{1}{n} (\sum^{n}_{i=1} w_i)^2 - 1\sum^{n}_{i=1} {w_i}^2 \}&= (\frac{1}{n}\sum^{n}_{i=1} w_i\sum^{n}_{i=1} y_i - \sum^{n}_{i=1} w_iy_i) + a(\sum^{n}_{i=1} w_ix_i - \frac{1}{n} \sum^{n}_{i=1} w_i\sum^{n}_{i=1} x_i) \cr
+    \displaystyle b\{ \frac{1}{n} (\sum^{n}_{i=1} w_i)^2 - \sum^{n}_{i=1} {w_i}^2 \}&= (\frac{1}{n}\sum^{n}_{i=1} w_i\sum^{n}_{i=1} y_i - \sum^{n}_{i=1} w_iy_i) + a(\sum^{n}_{i=1} w_ix_i - \frac{1}{n} \sum^{n}_{i=1} w_i\sum^{n}_{i=1} x_i) \cr
     \displaystyle b &= \frac{
         (\displaystyle \frac{1}{n}\sum^{n}_{i=1} w_i\sum^{n}_{i=1} y_i - \sum^{n}_{i=1} w_iy_i) + a(\sum^{n}_{i=1} w_ix_i - \frac{1}{n} \sum^{n}_{i=1} w_i\sum^{n}_{i=1} x_i)
     }
     {
-        \displaystyle \frac{1}{n} (\sum^{n}_{i=1} w_i)^2 - 1\sum^{n}_{i=1} {w_i}^2
+        \displaystyle \frac{1}{n} (\sum^{n}_{i=1} w_i)^2 - \sum^{n}_{i=1} {w_i}^2
     }
 \end{aligned}
 ```
@@ -382,10 +382,10 @@ WIP<br>
 ```
 ```math
 a = \frac{
-    \displaystyle (\sum^{n}_{i=1} {x_i}^2 - \frac{1}{n}(\sum^{n}_{i=1} {x_i})^2 )(\frac{1}{n} (\sum^{n}_{i=1} w_i)^2 - \sum^{n}_{i=1} {w_i}^2)+ (\sum^{n}_{i=1} w_ix_i - \frac{1}{n} \sum^{n}_{i=1} w_i\sum^{n}_{i=1} x_i)(\sum^{n}_{i=1} w_ix_i - \frac{1}{n}\sum^{n}_{i=1} {w_i}\sum^{n}_{i=1} x_i)
+    ( \displaystyle \sum^{n}_{i=1} x_iy_i - \frac{1}{n} \sum^{n}_{i=1} x_i\sum^{n}_{i=1} y_i)( \frac{1}{n} (\sum^{n}_{i=1} w_i)^2 - \sum^{n}_{i=1} {w_i}^2)-(\displaystyle \frac{1}{n}\sum^{n}_{i=1} w_i\sum^{n}_{i=1} y_i - \sum^{n}_{i=1} w_iy_i) (\sum^{n}_{i=1} w_ix_i - \frac{1}{n}\sum^{n}_{i=1} {w_i}\sum^{n}_{i=1} x_i)
 }
 {
-    ( \displaystyle \sum^{n}_{i=1} x_iy_i - \frac{1}{n} \sum^{n}_{i=1} x_i\sum^{n}_{i=1} y_i)( \frac{1}{n} (\sum^{n}_{i=1} w_i)^2 - \sum^{n}_{i=1} {w_i}^2)-(\displaystyle \frac{1}{n}\sum^{n}_{i=1} w_i\sum^{n}_{i=1} y_i - \sum^{n}_{i=1} w_iy_i) (\sum^{n}_{i=1} w_ix_i - \frac{1}{n}\sum^{n}_{i=1} {w_i}\sum^{n}_{i=1} x_i)
+    \displaystyle (\sum^{n}_{i=1} {x_i}^2 - \frac{1}{n}(\sum^{n}_{i=1} {x_i})^2 )(\frac{1}{n} (\sum^{n}_{i=1} w_i)^2 - \sum^{n}_{i=1} {w_i}^2)+ (\sum^{n}_{i=1} w_ix_i - \frac{1}{n} \sum^{n}_{i=1} w_i\sum^{n}_{i=1} x_i)(\sum^{n}_{i=1} w_ix_i - \frac{1}{n}\sum^{n}_{i=1} {w_i}\sum^{n}_{i=1} x_i)
 }
 ```
 $`b`$について
@@ -394,7 +394,7 @@ $`b`$について
         (\displaystyle \frac{1}{n}\sum^{n}_{i=1} w_i\sum^{n}_{i=1} y_i - \sum^{n}_{i=1} w_iy_i) + a(\sum^{n}_{i=1} w_ix_i - \frac{1}{n} \sum^{n}_{i=1} w_i\sum^{n}_{i=1} x_i)
     }
     {
-        \displaystyle \frac{1}{n} (\sum^{n}_{i=1} w_i)^2 - 1\sum^{n}_{i=1} {w_i}^2
+        \displaystyle \frac{1}{n} (\sum^{n}_{i=1} w_i)^2 - \sum^{n}_{i=1} {w_i}^2
     }
 ```
 ```math
@@ -402,14 +402,14 @@ $`b`$について
         (\displaystyle \frac{1}{n}\sum^{n}_{i=1} w_i\sum^{n}_{i=1} y_i - \sum^{n}_{i=1} w_iy_i) 
     }
     {
-        \displaystyle \frac{1}{n} (\sum^{n}_{i=1} w_i)^2 - 1\sum^{n}_{i=1} {w_i}^2
+        \displaystyle \frac{1}{n} (\sum^{n}_{i=1} w_i)^2 - \sum^{n}_{i=1} {w_i}^2
     }
     +
     a \frac{
         (\displaystyle \sum^{n}_{i=1} w_ix_i - \frac{1}{n} \sum^{n}_{i=1} w_i\sum^{n}_{i=1} x_i)
     }
     {
-        \displaystyle \frac{1}{n} (\sum^{n}_{i=1} w_i)^2 - 1\sum^{n}_{i=1} {w_i}^2
+        \displaystyle \frac{1}{n} (\sum^{n}_{i=1} w_i)^2 - \sum^{n}_{i=1} {w_i}^2
     }
 ```
 $`a`$を代入して<br>
@@ -418,27 +418,59 @@ $`a`$を代入して<br>
         (\displaystyle \frac{1}{n}\sum^{n}_{i=1} w_i\sum^{n}_{i=1} y_i - \sum^{n}_{i=1} w_iy_i) 
     }
     {
-        \displaystyle \frac{1}{n} (\sum^{n}_{i=1} w_i)^2 - 1\sum^{n}_{i=1} {w_i}^2
+        \displaystyle \frac{1}{n} (\sum^{n}_{i=1} w_i)^2 - \sum^{n}_{i=1} {w_i}^2
     }
     +
 ```
 ```math
     \frac{
-    \displaystyle (\sum^{n}_{i=1} {x_i}^2 - \frac{1}{n}(\sum^{n}_{i=1} {x_i})^2 )(\frac{1}{n} (\sum^{n}_{i=1} w_i)^2 - \sum^{n}_{i=1} {w_i}^2)+ (\sum^{n}_{i=1} w_ix_i - \frac{1}{n} \sum^{n}_{i=1} w_i\sum^{n}_{i=1} x_i)(\sum^{n}_{i=1} w_ix_i - \frac{1}{n}\sum^{n}_{i=1} {w_i}\sum^{n}_{i=1} x_i)
+        ( \displaystyle \sum^{n}_{i=1} x_iy_i - \frac{1}{n} \sum^{n}_{i=1} x_i\sum^{n}_{i=1} y_i)( \frac{1}{n} (\sum^{n}_{i=1} w_i)^2 - \sum^{n}_{i=1} {w_i}^2)-(\displaystyle \frac{1}{n}\sum^{n}_{i=1} w_i\sum^{n}_{i=1} y_i - \sum^{n}_{i=1} w_iy_i) (\sum^{n}_{i=1} w_ix_i - \frac{1}{n}\sum^{n}_{i=1} {w_i}\sum^{n}_{i=1} x_i)
     }
     {
-    ( \displaystyle \sum^{n}_{i=1} x_iy_i - \frac{1}{n} \sum^{n}_{i=1} x_i\sum^{n}_{i=1} y_i)( \frac{1}{n} (\sum^{n}_{i=1} w_i)^2 - \sum^{n}_{i=1} {w_i}^2)-(\displaystyle \frac{1}{n}\sum^{n}_{i=1} w_i\sum^{n}_{i=1} y_i - \sum^{n}_{i=1} w_iy_i) (\sum^{n}_{i=1} w_ix_i - \frac{1}{n}\sum^{n}_{i=1} {w_i}\sum^{n}_{i=1} x_i)
+        \displaystyle (\sum^{n}_{i=1} {x_i}^2 - \frac{1}{n}(\sum^{n}_{i=1} {x_i})^2 )(\frac{1}{n} (\sum^{n}_{i=1} w_i)^2 - \sum^{n}_{i=1} {w_i}^2)+ (\sum^{n}_{i=1} w_ix_i - \frac{1}{n} \sum^{n}_{i=1} w_i\sum^{n}_{i=1} x_i)(\sum^{n}_{i=1} w_ix_i - \frac{1}{n}\sum^{n}_{i=1} {w_i}\sum^{n}_{i=1} x_i)
     }
     \frac{
         (\displaystyle \sum^{n}_{i=1} w_ix_i - \frac{1}{n} \sum^{n}_{i=1} w_i\sum^{n}_{i=1} x_i)
     }
     {
-        \displaystyle \frac{1}{n} (\sum^{n}_{i=1} w_i)^2 - 1\sum^{n}_{i=1} {w_i}^2
+        \displaystyle \frac{1}{n} (\sum^{n}_{i=1} w_i)^2 - \sum^{n}_{i=1} {w_i}^2
     }
 ```
+$`c`$も代入したら出るけど、パトラッシュ…疲れたろ…僕も疲れたんだ…なんだかとても眠いんだ…<br>
 ### 重回帰分析における統計学的指標との関係
+ほんへ<br>
+重回帰分析、二変数だけでもこんな禿げそうになっとるんや<br>
+さっさと分散とか共分散とか使って楽になろうぜ<br>
 
-WIP<br>
+分散公式は以下の通り<br>
+```math
+\displaystyle \sigma_x^2 = \bar{x^2} - \bar{x}^2 = \frac{1}{n} \sum^n_{i=1} {x_i}^2 - (\frac{1}{n} \sum^n_{i=1} x_i)^2
+```
+ただし$`\bar{x}`$は$`x`$の平均で、$`\bar{x^2}`$は$`x`$の二乗平均<br>
+また共分散公式は以下の通り<br>
+```math
+\displaystyle \sigma_{xy} = \bar{xy} - \bar{x}\bar{y} = \frac{1}{n} \sum^n_{i=1} {x_i}{y_i} - (\frac{1}{n} \sum^n_{i=1} x_i)(\frac{1}{n} \sum^n_{i=1} y_i)
+```
+ただし$`\bar{x}`$は$`x`$の平均で、$`\bar{y}`$は$`y`$の平均、$`\bar{xy}`$は$`xy`$の平均<br>
+
+```math
+a = \frac{
+    ( \displaystyle \sum^{n}_{i=1} x_iy_i - \frac{1}{n} \sum^{n}_{i=1} x_i\sum^{n}_{i=1} y_i)( \frac{1}{n} (\sum^{n}_{i=1} w_i)^2 - \sum^{n}_{i=1} {w_i}^2)-(\displaystyle \frac{1}{n}\sum^{n}_{i=1} w_i\sum^{n}_{i=1} y_i - \sum^{n}_{i=1} w_iy_i) (\sum^{n}_{i=1} w_ix_i - \frac{1}{n}\sum^{n}_{i=1} {w_i}\sum^{n}_{i=1} x_i)
+}
+{
+    \displaystyle (\sum^{n}_{i=1} {x_i}^2 - \frac{1}{n}(\sum^{n}_{i=1} {x_i})^2 )(\frac{1}{n} (\sum^{n}_{i=1} w_i)^2 - \sum^{n}_{i=1} {w_i}^2)+ (\sum^{n}_{i=1} w_ix_i - \frac{1}{n} \sum^{n}_{i=1} w_i\sum^{n}_{i=1} x_i)(\sum^{n}_{i=1} w_ix_i - \frac{1}{n}\sum^{n}_{i=1} {w_i}\sum^{n}_{i=1} x_i)
+}
+```
+
+```math
+a = \frac{
+    \sigma_{xy}(-\sigma_w^2)-(-\sigma_{wy})(\sigma_{wx})
+}
+{
+    \sigma_x^2(-\sigma_w^2)+(\sigma_{wx})^2
+}
+```
+
 なんやかんやあって<br>
 
 ## カーネル回帰分析
