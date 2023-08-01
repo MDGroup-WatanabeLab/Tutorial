@@ -1,7 +1,17 @@
 # 回帰について
 ## 回帰とは
 あるデータ$`x`$,$`y`$において、$`y = f(x)`$という連続的なモデルを当てはめること。<br>
-単回帰や多項式回帰、重回帰などの種類がある。<br>
+関数が線形なら線形回帰、線形でないなら非線形回帰と分類される<br>
+```mermaid
+graph LR
+
+回帰---線形回帰
+回帰---非線形回帰
+線形回帰---単回帰
+線形回帰---多項式回帰
+線形回帰---重回帰
+```
+線形回帰には、単回帰や多項式回帰、重回帰などの種類がある。<br>
 上記の三つの違いは以下の通り。<br>
 
 | 名前 | 説明 | 回帰の式 |
@@ -9,6 +19,8 @@
 | 単回帰 | 変数が一種類で一次式 | $f(x) = ax + b$ |
 | 多項式回帰 | 変数が一種類で多項式 | $f(x) = ax^3 + bx^2 + cx + d$ |
 | 重回帰 | 変数が一杯 | $f(x) = ax + bu + cw + d$ |
+
+以下、線形回帰のうち、単回帰と二変数の重回帰について解説する。<br>
 
 ## 単回帰(最小二乗法)
 最小二乗法は単回帰を行うための**手法**の一つ<br>
@@ -375,6 +387,52 @@ a = \frac{
 {
     ( \displaystyle \sum^{n}_{i=1} x_iy_i - \frac{1}{n} \sum^{n}_{i=1} x_i\sum^{n}_{i=1} y_i)( \frac{1}{n} (\sum^{n}_{i=1} w_i)^2 - \sum^{n}_{i=1} {w_i}^2)-(\displaystyle \frac{1}{n}\sum^{n}_{i=1} w_i\sum^{n}_{i=1} y_i - \sum^{n}_{i=1} w_iy_i) (\sum^{n}_{i=1} w_ix_i - \frac{1}{n}\sum^{n}_{i=1} {w_i}\sum^{n}_{i=1} x_i)
 }
+```
+$`b`$について
+```math
+\displaystyle b = \frac{
+        (\displaystyle \frac{1}{n}\sum^{n}_{i=1} w_i\sum^{n}_{i=1} y_i - \sum^{n}_{i=1} w_iy_i) + a(\sum^{n}_{i=1} w_ix_i - \frac{1}{n} \sum^{n}_{i=1} w_i\sum^{n}_{i=1} x_i)
+    }
+    {
+        \displaystyle \frac{1}{n} (\sum^{n}_{i=1} w_i)^2 - 1\sum^{n}_{i=1} {w_i}^2
+    }
+```
+```math
+\displaystyle b = \frac{
+        (\displaystyle \frac{1}{n}\sum^{n}_{i=1} w_i\sum^{n}_{i=1} y_i - \sum^{n}_{i=1} w_iy_i) 
+    }
+    {
+        \displaystyle \frac{1}{n} (\sum^{n}_{i=1} w_i)^2 - 1\sum^{n}_{i=1} {w_i}^2
+    }
+    +
+    a \frac{
+        (\displaystyle \sum^{n}_{i=1} w_ix_i - \frac{1}{n} \sum^{n}_{i=1} w_i\sum^{n}_{i=1} x_i)
+    }
+    {
+        \displaystyle \frac{1}{n} (\sum^{n}_{i=1} w_i)^2 - 1\sum^{n}_{i=1} {w_i}^2
+    }
+```
+$`a`$を代入して
+```math
+\displaystyle b = \frac{
+        (\displaystyle \frac{1}{n}\sum^{n}_{i=1} w_i\sum^{n}_{i=1} y_i - \sum^{n}_{i=1} w_iy_i) 
+    }
+    {
+        \displaystyle \frac{1}{n} (\sum^{n}_{i=1} w_i)^2 - 1\sum^{n}_{i=1} {w_i}^2
+    }
+    +
+    \frac{
+    \displaystyle (\sum^{n}_{i=1} {x_i}^2 - \frac{1}{n}(\sum^{n}_{i=1} {x_i})^2 )(\frac{1}{n} (\sum^{n}_{i=1} w_i)^2 - \sum^{n}_{i=1} {w_i}^2)+ (\sum^{n}_{i=1} w_ix_i - \frac{1}{n} \sum^{n}_{i=1} w_i\sum^{n}_{i=1} x_i)(\sum^{n}_{i=1} w_ix_i - \frac{1}{n}\sum^{n}_{i=1} {w_i}\sum^{n}_{i=1} x_i)
+    }
+    {
+    ( \displaystyle \sum^{n}_{i=1} x_iy_i - \frac{1}{n} \sum^{n}_{i=1} x_i\sum^{n}_{i=1} y_i)( \frac{1}{n} (\sum^{n}_{i=1} w_i)^2 - \sum^{n}_{i=1} {w_i}^2)-(\displaystyle \frac{1}{n}\sum^{n}_{i=1} w_i\sum^{n}_{i=1} y_i - \sum^{n}_{i=1} w_iy_i) (\sum^{n}_{i=1} w_ix_i - \frac{1}{n}\sum^{n}_{i=1} {w_i}\sum^{n}_{i=1} x_i)
+    }
+    \frac{
+        (\displaystyle \sum^{n}_{i=1} w_ix_i - \frac{1}{n} \sum^{n}_{i=1} w_i\sum^{n}_{i=1} x_i)
+    }
+    {
+        \displaystyle \frac{1}{n} (\sum^{n}_{i=1} w_i)^2 - 1\sum^{n}_{i=1} {w_i}^2
+    }
 ```
 ### 重回帰分析における統計学的指標との関係
 
