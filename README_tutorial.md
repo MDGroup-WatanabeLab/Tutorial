@@ -1,13 +1,17 @@
 # 渡邉研究室　計算班チュートリアル
-渡邉研究室計算班のチュートリアルです。まずは、チュートリアルのために、「Tutorial」というディレクトリを作成しましょう。  
-Linuxコマンドの練習もかねて、ターミナルで次のコマンドを打つことで、チュートリアルごとのディレクトリを作成します。
+渡邉研究室計算班のチュートリアルです。まずは、自分専用のディレクトリを作成しましょう。自分の苗字などが良いでしょう。次のコマンドで作成できます。  
 
-    $ mkdir Tutorial
-    $ cd Tutorial
-    $ git clone https://github.com/MDGroup-WatanabeLab/Tutorial/1_lammps_run
-    $ git clone https://github.com/MDGroup-WatanabeLab/Tutorial/2_mdpython 
-    $ git clone https://github.com/MDGroup-WatanabeLab/Tutorial/3_VASP_AIMD
-    $ git clone https://github.com/MDGroup-WatanabeLab/Tutorial/4_VASP_DFT
+    $ mkdir [苗字]
+    $ cd [作成したディレクトリ名]
+
+
+Linuxコマンドの練習もかねて、ターミナルで次のコマンドを打つことで、チュートリアル用のディレクトリが作成されます。。
+
+    $ git clone https://github.com/MDGroup-WatanabeLab/Tutorial.git
+
+また、構造作成プログラムである、mdpythonもダウンロードしましょう。
+
+    $ git clone https://github.com/MDGroup-WatanabeLab/mdpython.git
 
 
 
@@ -19,7 +23,7 @@ Linuxコマンドの練習もかねて、ターミナルで次のコマンドを
 |PC名<br>（末尾）|4.4, 4.5, 6.3, 6.34, 6.35|4.4, 4.5, 6.35|
 
 この表に対応したPCでチュートリアルを行いましょう。  
-詳しい性能差は、Boxの「計算班PCリスト.xlsx」を参照してください
+詳しい性能差は、Boxの「計算班PCリスト.xlsx」を参照してください。
 
 ## 1. LAMMPSでMD計算  
 LAMMPSでMD計算を行います。MD計算とは、古典力学に基づき、運動方程式から原子の移動をシミュレーションする方法です。実際にやってみましょう。  
@@ -27,11 +31,12 @@ LAMMPSでMD計算を行います。MD計算とは、古典力学に基づき、�
 
     $ cd 1_lammps_run
 
-構造を作成するには、mdpythonのStructureから、所定のpythonプログラムが必要です。今回のチュートリアルでは、NaClの計算を行いたいので、「rocksalt.py」を次のコマンドでダウンロードしましょう。
+構造を作成するには、mdpythonのStructureから、所定のpythonプログラムが必要です。今回のチュートリアルでは、NaClの計算を行いたいので、岩塩型構造を作成できるプログラムを持ってきましょう。  
+次のコマンドを実行しましょう。
 
-    $ git clone https://github.com/MDGroup-WatanabeLab/mdpython/blob/main/Structure/rocksalt.py
+    $ cp ../../mdpython/Structure/rocksalt.py rocksalt.py
 
-ダウンロード出来たら、早速実行しましょう。
+コピー出来たら、早速実行しましょう。
 
     $ python rocksalt.py
 
@@ -58,9 +63,9 @@ LAMMPSでMD計算を行います。MD計算とは、古典力学に基づき、�
 
     >> 4 4 4
 
-と打てば（>>は不要）、NaClの構造がPOSCAR形式で作成できます。しかし、これから行うLAMMPSの計算では、mdl形式やlmp形式が必要です。ですので、ファイル形式を変換する必要があります。次のコマンドで、ファイルコンバーターをダウンロードしましょう。
+と打てば（>>は不要）、NaClの構造がPOSCAR形式で作成できます。しかし、これから行うLAMMPSの計算では、mdl形式やlmp形式が必要です。ですので、ファイル形式を変換する必要があります。次のコマンドで、ファイルコンバーターをコピーしましょう。
 
-    $ git clone https://github.com/MDGroup-WatanabeLab/mdpython/blob/main/Converter/convert_file.py 
+    $ cp ../../mdpython/Converter/convert_file.py convert_file.py
 
 コンバーターを次のコマンドで実行しましょう。
 
@@ -75,6 +80,7 @@ LAMMPSでMD計算を行います。MD計算とは、古典力学に基づき、�
     Which format do you want to convert to ? :
 
 2を押せば、lmp形式に変換できます。名前は好きにしてください。  
+作成した構造がどのようになっているか確認するため、作成した構造を __自分のPCへコピー__ し、VESTAかOVITOで確認しましょう。   
 すでに必要なファイルはすべて用意できているはずなので、
 
     $ ls
@@ -133,28 +139,123 @@ LAMMPSでMD計算を行います。MD計算とは、古典力学に基づき、�
 
 さて、このファイルでは、一行だけ自分で変えなければならない部分があります。わかりますか？  
 
-わかったら、その部分を変え、計算を始めましょう。次のコマンドを実行します。
+わかったら、その部分を変え、計算を始めましょう。  
+まずは、他の人が計算していないか、次のコマンドで確認しましょう。
 
-    $ g++ rocksalt.cpp
+    $ top
 
-    $ nohup ./a.out &
+q キーで元の画面に戻ります。次のコマンドを実行します。
+
+    $ nohup mpirun -np 16 lmp_mpi < in.amorphous.NaCl &
 
 正常に動作すれば、「nohup.out」に出力結果が書き込まれます。終わるまで待ちましょう。amorphous.final が生成されたらオッケーです。
 
-## 2. mdpythonを編集する  
-先ほど、「rocksalt.py」を使ってもらいましたが、このプログラムは計算班が作成した「mdpython」というプログラム群の一つです。特級呪物にならないよう、追記や作成の仕方を確認しましょう。
 
-    $ cd 2_mdpython
+## 3. VASPでDFT計算  
+VASPでDFT計算を行います。量子力学に基づいた、正確だが時間がかかる計算である第一原理計算のうち、汎密度関数法（Density functional theory）を扱います。   
+ディレクトリを移動しましょう。
 
-で移動しましょう。「bcc.py」と「fcc.py」という、二つのファイルがあると思います。この二つのファイルを開き、どのような処理を行っているか見てみましょう。  
-それでは、「bcc.py」に __リチウム（Li, a = 3.491 angs）__ 、「fcc.py」に __カルシウム（Ca, a = 5.81 angs）__ の構造を作成できるように、プログラムを追記しましょう。  
-コードが完成したら、実行し、エラー処理しつつ完成させましょう。
+    $ cd ../3_VASP_DFT
+ 
+すでに必要なファイルはすべて用意されています。各ファイルの中身は、以下の通りです。
+
+INCARは、
+
+    # Basic parameters
+    ISMEAR = 0
+    SIGMA = 0.05
+    LREAL = Auto
+    ISYM = 0
+    NELMIN = 4
+    NELM = 100
+    EDIFF = 1E-6
+    ALGO = VeryFast
+    PREC = Accurate
+
+    # Not change position
+    IBRION = -1
+
+KPOINTSは、
+
+    K-Points
+    0
+    Gamma
+    2  2  2
+    0  0  0
+
+POSCARは、
+
+    Diamond_Ge_2x2x2  
+    1.0  
+    11.3508 0.0 0.0  
+    0.0 11.3508 0.0   
+    0.0 0.0 11.3508   
+    Ge  
+    64  
+    Cartesian  
+    0.0 0.0 0.0  
+    0.0 2.8377 2.8377  
+    2.8377 0.0 2.8377  
+    2.8377 2.8377 0.0  
+            :
+            :
+            :
+    8.5131 8.5131 5.6754
+    7.09425 7.09425 7.09425
+    9.93195 9.93195 7.09425
+    9.93195 7.09425 9.93195
+    7.09425 9.93195 9.93195
+
+POTCARは、
+
+    PAW_PBE Ge 05Jan2001                   
+    4.00000000000000     
+    parameters from PSCTR are:  
+             :  
+             :  
+             :  
+    0.000000000000E+00  0.000000000000E+00  0.000000000000E+00  0.000000000000E+00  0.000000000000E+00
+    0.000000000000E+00  0.000000000000E+00  0.000000000000E+00  0.000000000000E+00  0.000000000000E+00
+    0.000000000000E+00  0.000000000000E+00
+    End of Dataset
 
 
+POSCARをVESTAかOVITOで開き、どのような構造かあらかじめ確認しましょう。確認出来たら、 VASPの計算を開始しましょう。まずは、他の人が計算していないか、次のコマンドで確認します。
 
-## 3. VASPで第一原理MD
-　VASPで第一原理MDを行います。第一原理MDとは、簡単に言うと、正確だが遅い第一原理計算と、精度は悪いが速いMD計算を組み合わせた計算方法です。実際にやってみましょう。  
-　まず、次の５つのファイルを用意します。「3_VASP_AIMD」フォルダから、ダウンロードしてください。各ファイルの中身は、以下の通りです。
+    $ top
+
+q キーで元の画面に戻ります。確認出来たら、次のコマンドを打ちましょう。  
+vasp_std のパスは、WinSCPからコピーできます。
+
+    $ nohup mpirun -np [並列コア数] [vasp_stdのパス] &
+    $ disown
+    $ top
+
+正しく計算が開始できていれば、次のようにファイルが生成されます。
+
+    Tutorial       
+        └── 1_lammps_run
+        └── 2_lammps_run0
+        └── 3_VASP_DFT
+            └── CHG
+            └── CHGCAR
+                  :
+            └── nohup.out
+                  :
+            └── WAVECAR
+            └── XDATCAR
+        └── 4_VASP_AIMD
+
+時間経過で nohup.out に結果が記録されていくので、適宜確認しましょう。  
+また、計算が終わるまでは、入力ファイルの意味をvaspwikiで確認しておきましょう。  
+エネルギーの計算が完了すれば終了です。お疲れさまでした。
+
+## 4. VASPで第一原理MD
+　VASPで第一原理MDを行います。第一原理MDとは、簡単に言うと、正確だが遅い第一原理計算と、精度は悪いが速いMD計算を組み合わせた計算方法です。実際にやってみましょう。これまでと同様、ディレクトリを移動しましょう。
+
+    $ cd ../4_VASP_AIMD
+
+すでに必要なファイルはすべて用意されています。各ファイルの中身は、以下の通りです。
 
 ICONSTは、
 
@@ -234,12 +335,8 @@ POTCARは、
     0.000000000000E+00  0.000000000000E+00
     End of Dataset
 
-それでは、Teratermで、次のコマンドを入れましょう。
-
-    $ cd 3_VASP_AIMD
-
-これで 3_VASP_AIMD ディレクトリに移動できたはずです。  
-次に、VASPの計算を開始しましょう。まずは、他の人が計算していないか、次のコマンドで確認しましょう。
+ 
+VASPの計算を開始しましょう。まずは、他の人が計算していないか、次のコマンドで確認しましょう。
 
     $ top
 
@@ -248,112 +345,16 @@ q キーで元の画面に戻ります。
 vasp_std のパスは、WinSCPからコピーできます。
 
     $ nohup mpirun -np [並列コア数] [vasp_stdのパス] &
-
-正しく計算が開始できていれば、次のようにファイルが生成されます。
-
-    Tutorial       
-        └── 1_LAMMPS_run
-        └── 2_LAMMPS_run0
-        └── 3_VASP_AIMD
-            └── CHG
-            └── CHGCAR
-                  :
-            └── nohup.out
-                  :
-            └── WAVECAR
-            └── XDATCAR
-        └── 4_VASP_DFT
-
-時間経過で nohup.outに結果が記録されていくので、適宜確認しましょう。  
-また、計算が終わるまでは、入力ファイルの意味をvaspwikiで確認しておきましょう。  
-50タイムステップ分が実行されたら完了です。CONTCARをVESTAなどで見たり、XDATCARをOVITOでgif動画にしてみましょう。お疲れさまでした。
-
-## 4. VASPでDFT計算  
-VASPでDFT計算を行います。簡単にいえば、第一原理計算です。手順は先ほどの３とかなり似ています。復習もかねて進めましょう。  
-まず、次の５つのファイルを用意します。「3_VASP_AIMD」フォルダから、ダウンロードしてください。各ファイルの中身は、以下の通りです。
-
-INCARは、
-
-    # Basic parameters
-    ISMEAR = 0
-    SIGMA = 0.05
-    LREAL = Auto
-    ISYM = 0
-    NELMIN = 4
-    NELM = 100
-    EDIFF = 1E-6
-    ALGO = VeryFast
-    PREC = Accurate
-
-    # Not change position
-    IBRION = -1
-
-KPOINTSは、
-
-    K-Points
-    0
-    Gamma
-    2  2  2
-    0  0  0
-
-POSCARは、
-
-    Diamond_Ge_2x2x2  
-    1.0  
-    11.3508 0.0 0.0  
-    0.0 11.3508 0.0   
-    0.0 0.0 11.3508   
-    Ge  
-    64  
-    Cartesian  
-    0.0 0.0 0.0  
-    0.0 2.8377 2.8377  
-    2.8377 0.0 2.8377  
-    2.8377 2.8377 0.0  
-            :
-            :
-            :
-    8.5131 8.5131 5.6754
-    7.09425 7.09425 7.09425
-    9.93195 9.93195 7.09425
-    9.93195 7.09425 9.93195
-    7.09425 9.93195 9.93195
-
-POTCARは、
-
-    PAW_PBE Ge 05Jan2001                   
-    4.00000000000000     
-    parameters from PSCTR are:  
-             :  
-             :  
-             :  
-    0.000000000000E+00  0.000000000000E+00  0.000000000000E+00  0.000000000000E+00  0.000000000000E+00
-    0.000000000000E+00  0.000000000000E+00  0.000000000000E+00  0.000000000000E+00  0.000000000000E+00
-    0.000000000000E+00  0.000000000000E+00
-    End of Dataset
-
-それでは、Teratermで、次のコマンドを入れましょう。
-
-    $ cd 4_VASP_DFT
-
-これで 4_VASP_AIMD ディレクトリに移動できたはずです。  
-次に、VASPの計算を開始しましょう。まずは、他の人が計算していないか、次のコマンドで確認しましょう。
-
+    $ disown
     $ top
 
-q キーで元の画面に戻ります。
-確認出来たら、次のコマンドを打ちましょう。  
-vasp_std のパスは、WinSCPからコピーできます。
-
-    $ nohup mpirun -np [並列コア数] [vasp_stdのパス] &
-
 正しく計算が開始できていれば、次のようにファイルが生成されます。
 
     Tutorial       
         └── 1_LAMMPS_run
         └── 2_LAMMPS_run0
-        └── 3_VASP_AIMD
-        └── 4_VASP_DFT
+        └── 3_VASP_DFT
+        └── 4_VASP_AIMD
             └── CHG
             └── CHGCAR
                   :
@@ -362,6 +363,27 @@ vasp_std のパスは、WinSCPからコピーできます。
             └── WAVECAR
             └── XDATCAR
 
-時間経過で nohup.outに結果が記録されていくので、適宜確認しましょう。  
+時間経過で nohup.out に結果が記録されていくので、適宜確認しましょう。  
 また、計算が終わるまでは、入力ファイルの意味をvaspwikiで確認しておきましょう。  
-エネルギーの計算が完了すれば終了です。お疲れさまでした。
+50タイムステップ分が実行されたら完了です。CONTCARをVESTAなどで見たり、XDATCARをOVITOでgif動画にしてみましょう。  
+このチュートリアルでは、圧力、体積、温度、エネルギー変化のグラフ化を行います。そのためのプログラムを次のコマンドでコピーします。
+
+    $ cp ../../mdpython/Tool4VASP/PVTE_graph.py PVTE_graph.py
+
+プログラムを実行しましょう。
+
+    $ python PVTE_graph.py
+
+すこし時間がかかるかもしれません。「PVTE_graph.xlsx」というエクセルファイルが生成されます。開いてみると、圧力、体積、温度、エネルギー変化のグラフが作成されているはずです。
+お疲れさまでした。
+
+
+
+## 5. mdpythonを編集する  
+先ほど、「rocksalt.py」を使ってもらいましたが、このプログラムは計算班が作成した「mdpython」というプログラム群の一つです。特級呪物にならないよう、追記や作成の仕方を確認しましょう。
+
+    $ cd ../5_mdpython
+
+で移動しましょう。「bcc.py」と「fcc.py」という、二つのファイルがあると思います。この二つのファイルを開き、どのような処理を行っているか見てみましょう。  
+それでは、「bcc.py」に __リチウム（Li, a = 3.491 angs）__ 、「fcc.py」に __カルシウム（Ca, a = 5.81 angs）__ の構造を作成できるように、プログラムを追記しましょう。  
+コードが完成したら、実行し、エラー処理しつつ完成させましょう。
