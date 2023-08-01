@@ -412,7 +412,7 @@ $`b`$について
         \displaystyle \frac{1}{n} (\sum^{n}_{i=1} w_i)^2 - 1\sum^{n}_{i=1} {w_i}^2
     }
 ```
-$`a`$を代入して
+$`a`$を代入して<br>
 ```math
 \displaystyle b = \frac{
         (\displaystyle \frac{1}{n}\sum^{n}_{i=1} w_i\sum^{n}_{i=1} y_i - \sum^{n}_{i=1} w_iy_i) 
