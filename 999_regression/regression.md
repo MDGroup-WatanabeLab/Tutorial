@@ -344,7 +344,7 @@ WIP<br>
 ```
 下の式から$`c`$をもとめて<br>
 ```math
-\displaystyle c = \frac{\displaystyle \sum^{n}_{i=1} y_i - a\sum^{n}_{i=1} {x_i} - b\sum^{n}_{i=1} {w_i}}{n}
+c = \frac{\displaystyle \sum^{n}_{i=1} y_i - a\sum^{n}_{i=1} {x_i} - b\sum^{n}_{i=1} {w_i}}{n}
 ```
 真ん中の式にぶち込んで$`b`$を求める<br>
 ```math
@@ -381,16 +381,16 @@ WIP<br>
 \frac{( \displaystyle \sum^{n}_{i=1} x_iy_i - \frac{1}{n} \sum^{n}_{i=1} x_i\sum^{n}_{i=1} y_i)( \frac{1}{n} (\sum^{n}_{i=1} w_i)^2 - \sum^{n}_{i=1} {w_i}^2)-(\displaystyle \frac{1}{n}\sum^{n}_{i=1} w_i\sum^{n}_{i=1} y_i - \sum^{n}_{i=1} w_iy_i) (\sum^{n}_{i=1} w_ix_i - \frac{1}{n}\sum^{n}_{i=1} {w_i}\sum^{n}_{i=1} x_i) }{\displaystyle \frac{1}{n} (\sum^{n}_{i=1} w_i)^2 - \sum^{n}_{i=1} {w_i}^2} = a \frac{\displaystyle (\sum^{n}_{i=1} {x_i}^2 - \frac{1}{n}(\sum^{n}_{i=1} {x_i})^2 )(\frac{1}{n} (\sum^{n}_{i=1} w_i)^2 - \sum^{n}_{i=1} {w_i}^2)+ (\sum^{n}_{i=1} w_ix_i - \frac{1}{n} \sum^{n}_{i=1} w_i\sum^{n}_{i=1} x_i)(\sum^{n}_{i=1} w_ix_i - \frac{1}{n}\sum^{n}_{i=1} {w_i}\sum^{n}_{i=1} x_i)}{\displaystyle \frac{1}{n} (\sum^{n}_{i=1} w_i)^2 - \sum^{n}_{i=1} {w_i}^2}
 ```
 ```math
-a = \frac{
+    a = \frac{
     ( \displaystyle \sum^{n}_{i=1} x_iy_i - \frac{1}{n} \sum^{n}_{i=1} x_i\sum^{n}_{i=1} y_i)( \frac{1}{n} (\sum^{n}_{i=1} w_i)^2 - \sum^{n}_{i=1} {w_i}^2)-(\displaystyle \frac{1}{n}\sum^{n}_{i=1} w_i\sum^{n}_{i=1} y_i - \sum^{n}_{i=1} w_iy_i) (\sum^{n}_{i=1} w_ix_i - \frac{1}{n}\sum^{n}_{i=1} {w_i}\sum^{n}_{i=1} x_i)
-}
-{
+    }
+    {
     \displaystyle (\sum^{n}_{i=1} {x_i}^2 - \frac{1}{n}(\sum^{n}_{i=1} {x_i})^2 )(\frac{1}{n} (\sum^{n}_{i=1} w_i)^2 - \sum^{n}_{i=1} {w_i}^2)+ (\sum^{n}_{i=1} w_ix_i - \frac{1}{n} \sum^{n}_{i=1} w_i\sum^{n}_{i=1} x_i)(\sum^{n}_{i=1} w_ix_i - \frac{1}{n}\sum^{n}_{i=1} {w_i}\sum^{n}_{i=1} x_i)
-}
+    }
 ```
 $`b`$について
 ```math
-\displaystyle b = \frac{
+    b = \frac{
         (\displaystyle \frac{1}{n}\sum^{n}_{i=1} w_i\sum^{n}_{i=1} y_i - \sum^{n}_{i=1} w_iy_i) + a(\sum^{n}_{i=1} w_ix_i - \frac{1}{n} \sum^{n}_{i=1} w_i\sum^{n}_{i=1} x_i)
     }
     {
@@ -398,7 +398,7 @@ $`b`$について
     }
 ```
 ```math
-\displaystyle b = \frac{
+     b = \frac{
         (\displaystyle \frac{1}{n}\sum^{n}_{i=1} w_i\sum^{n}_{i=1} y_i - \sum^{n}_{i=1} w_iy_i) 
     }
     {
@@ -414,7 +414,7 @@ $`b`$について
 ```
 $`a`$を代入して<br>
 ```math
-\displaystyle b = \frac{
+    b = \frac{
         (\displaystyle \frac{1}{n}\sum^{n}_{i=1} w_i\sum^{n}_{i=1} y_i - \sum^{n}_{i=1} w_iy_i) 
     }
     {
@@ -452,7 +452,7 @@ $`c`$も代入したら出るけど、パトラッシュ…疲れたろ…僕も
 \displaystyle \sigma_{xy} = \bar{xy} - \bar{x}\bar{y} = \frac{1}{n} \sum^n_{i=1} {x_i}{y_i} - (\frac{1}{n} \sum^n_{i=1} x_i)(\frac{1}{n} \sum^n_{i=1} y_i)
 ```
 ただし$`\bar{x}`$は$`x`$の平均で、$`\bar{y}`$は$`y`$の平均、$`\bar{xy}`$は$`xy`$の平均<br>
-
+$`a`$を見た目きれいにしたい<br>
 ```math
 a = \frac{
     ( \displaystyle \sum^{n}_{i=1} x_iy_i - \frac{1}{n} \sum^{n}_{i=1} x_i\sum^{n}_{i=1} y_i)( \frac{1}{n} (\sum^{n}_{i=1} w_i)^2 - \sum^{n}_{i=1} {w_i}^2)-(\displaystyle \frac{1}{n}\sum^{n}_{i=1} w_i\sum^{n}_{i=1} y_i - \sum^{n}_{i=1} w_iy_i) (\sum^{n}_{i=1} w_ix_i - \frac{1}{n}\sum^{n}_{i=1} {w_i}\sum^{n}_{i=1} x_i)
@@ -463,16 +463,255 @@ a = \frac{
 ```
 
 ```math
-a = \frac{
-    \sigma_{xy}(-\sigma_w^2)-(-\sigma_{wy})(\sigma_{wx})
-}
-{
-    \sigma_x^2(-\sigma_w^2)+(\sigma_{wx})^2
-}
+\begin{aligned}
+    a &= \frac{
+        \sigma_{xy}(-\sigma_w^2)-(-\sigma_{wy})(\sigma_{wx})
+    }
+    {
+        \sigma_x^2(-\sigma_w^2)+(\sigma_{wx})^2
+    } \cr
+    a &= \frac{
+        \sigma_w^2\sigma_{xy}-\sigma_{wx}\sigma_{wy}
+    }
+    {
+        \sigma_w^2\sigma_x^2-(\sigma_{wx})^2
+    }
+\end{aligned}
 ```
 
-なんやかんやあって<br>
+$`b`$も見た目きれいにした後、$`a`$をつっこみたい
 
-## カーネル回帰分析
-
-WIP<br>
+```math
+b = \frac{
+        (\displaystyle \frac{1}{n}\sum^{n}_{i=1} w_i\sum^{n}_{i=1} y_i - \sum^{n}_{i=1} w_iy_i) 
+    }
+    {
+        \displaystyle \frac{1}{n} (\sum^{n}_{i=1} w_i)^2 - \sum^{n}_{i=1} {w_i}^2
+    }
+    +
+    a
+    \frac{
+        (\displaystyle \sum^{n}_{i=1} w_ix_i - \frac{1}{n} \sum^{n}_{i=1} w_i\sum^{n}_{i=1} x_i)
+    }
+    {
+        \displaystyle \frac{1}{n} (\sum^{n}_{i=1} w_i)^2 - \sum^{n}_{i=1} {w_i}^2
+    }
+```
+```math
+\begin{aligned}
+    b &=\frac{
+        -\sigma_{wy}
+    }
+    {
+        -\sigma_w^2
+    }
+    +
+    a
+    \frac{
+        \sigma_{wx}
+    }
+    {
+        -\sigma_w^2
+    } \cr
+    b &=\frac{
+        \sigma_{wy}
+    }
+    {
+        \sigma_w^2
+    }
+    -
+    a
+    \frac{
+        \sigma_{wx}
+    }
+    {
+        \sigma_w^2
+    } \cr
+    b &=\frac{
+        \sigma_{wy}
+    }
+    {
+        \sigma_w^2
+    }
+    -
+    \frac{
+        \sigma_w^2\sigma_{xy}-\sigma_{wx}\sigma_{wy}
+    }
+    {
+        \sigma_w^2\sigma_x^2-(\sigma_{wx})^2
+    }
+    \frac{
+        \sigma_{wx}
+    }
+    {
+        \sigma_w^2
+    }
+\end{aligned}
+```
+でまあ$`c`$に関しては
+```math
+\begin{aligned}
+    c &= \frac{\displaystyle \sum^{n}_{i=1} y_i - a\sum^{n}_{i=1} {x_i} - b\sum^{n}_{i=1} {w_i}}{n}
+    &= \bar{y} - a\bar{x} -b\bar{w}
+\end{aligned}
+```
+で出すと<br>
+思ったよりキレイにならなかったと思ったそこのあなた<br>
+実はもっときれいにできるんです<br>
+$`a`$について<br>
+```math
+\begin{aligned}
+    a &= \frac{
+        \sigma_w^2\sigma_{xy}-\sigma_{wx}\sigma_{wy}
+    }
+    {
+        \sigma_w^2\sigma_x^2-(\sigma_{wx})^2
+    } \cr
+    \frac{
+        \sigma_w^2\sigma_x^2-(\sigma_{wx})^2
+    }
+    {
+        \sigma_w^2
+    }
+    a &=
+    \frac{
+        \sigma_w^2\sigma_{xy}-\sigma_{wx}\sigma_{wy}
+    }
+    {
+        \sigma_w^2
+    } \cr
+    \sigma_x^2 a-
+    \frac{
+        (\sigma_{wx})^2
+    }
+    {
+        \sigma_w^2
+    }
+    a &= \sigma_{xy} -
+    \frac{
+        \sigma_{wx}\sigma_{wy}
+    }
+    {
+        \sigma_w^2
+    } \cr
+    \frac{
+        \sigma_{wx}\sigma_{wy}
+    }
+    {
+        \sigma_w^2
+    }
+    -
+    \frac{
+        (\sigma_{wx})^2
+    }
+    {
+        \sigma_w^2
+    }
+    a + \sigma_x^2 a
+    &= \sigma_{xy} \cr
+    \sigma_{wx} (\frac{
+        \sigma_{wy}
+    }
+    {
+        \sigma_w^2
+    }
+    -
+    \frac{
+        \sigma_{wx}
+    }
+    {
+        \sigma_w^2
+    }
+    a )+ \sigma_x^2 a
+    &= \sigma_{xy}
+\end{aligned}
+```
+ここで思い出してほしい<br>
+```math
+    b =\frac{
+        \sigma_{wy}
+    }
+    {
+        \sigma_w^2
+    }
+    -
+    a
+    \frac{
+        \sigma_{wx}
+    }
+    {
+        \sigma_w^2
+    }
+```
+だったことに…<br>
+代入すると$`a`$についての式は<br>
+```math
+    \sigma_{wx} b+ \sigma_x^2 a = \sigma_{xy}
+```
+また$'b'$についても
+```math
+\begin{aligned}
+    b =\frac{
+        \sigma_{wy}
+    }
+    {
+        \sigma_w^2
+    }
+    -
+    a
+    \frac{
+        \sigma_{wx}
+    }
+    {
+        \sigma_w^2
+    } \cr
+    b =\frac{
+        \sigma_{wy} - a \sigma_{wx}
+    }
+    {
+        \sigma_w^2
+    } \cr
+    \sigma_w^2 b &= \sigma_{wy} - a \sigma_{wx} \cr
+    \sigma_{wx} a + \sigma_w^2 b &= \sigma_{wy}
+\end{aligned}
+```
+得られた式をもっかい書いてみる<br>
+```math
+\left.
+    \begin{matrix}
+        \sigma_x^2 a + \sigma_{wx} b = \sigma_{xy} \cr
+        \sigma_{wx} a + \sigma_w^2 b = \sigma_{wy}
+    \end{matrix}
+\right\}
+```
+なんかこう、行列でまとめられそうじゃね？<br>
+```math
+    (
+        \begin{matrix}
+            \sigma_x^2 & \sigma_{wx} \\ 
+            \sigma_{wx} & \sigma_w^2
+        \end{matrix}
+    )
+    \cdot
+    (
+        \begin{matrix}
+            a \\ 
+            b
+        \end{matrix}
+    )
+    =
+    (
+        \begin{matrix}
+            \sigma_{xy} \\ 
+            \sigma_{wy}
+        \end{matrix}
+    )
+```
+ね？きれいになったでしょ？<br>
+~~**わかるかこんなもん**~~<br>
+ちなこの行列$`(
+        \begin{matrix}
+            \sigma_x^2 & \sigma_{wx} \\ 
+            \sigma_{wx} & \sigma_w^2
+        \end{matrix}
+    )`$は**分散共分散行列**とか名前がついていたりする。
