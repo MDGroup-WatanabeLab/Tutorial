@@ -3,7 +3,7 @@ units metal
 atom_style atomic
 boundary p p p
 
-read_data Ge444.lmp
+read_data Ge222.lmp
 
 pair_style      tersoff
 pair_coeff      * * Ge.tersoff Ge 
