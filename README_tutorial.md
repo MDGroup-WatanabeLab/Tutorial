@@ -283,9 +283,11 @@ vasp_std のパスは、以下の表の通りです。
 
      cp ../../mdpython/Tool4VASP/EIGENVAL.py EIGENVAL.py
 
+実行しましょう。
+
      python EIGENVAL.py
 
-「EIGENVAL.xlsx」が生成されるはずです。開くと、
+「EIGENVAL.xlsx」が生成されるはずです。開くと、  
 <img width="586" alt="スクリーンショット 2023-08-02 105455" src="https://github.com/MDGroup-WatanabeLab/image_for_mdpython/assets/138444525/3cf5b9c6-8ad1-4977-9399-dabd5288dda3">
 
 このようにバンド図が作成されます。お疲れさまでした。
