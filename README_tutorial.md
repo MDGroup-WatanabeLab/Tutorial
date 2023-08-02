@@ -281,9 +281,14 @@ vasp_std のパスは、以下の表の通りです。
 また、計算が終わるまでは、入力ファイルの意味をvaspwikiで確認しておきましょう。  
 エネルギーの計算が完了すれば終了です。せっかくなので、エネルギーバンド図を作成しましょう。そのためのプログラムをコピーしましょう。
 
-    $ cp ../../mdpython/Tool4VASP/EIGENVAL.py EIGENVAL.py
+     cp ../../mdpython/Tool4VASP/EIGENVAL.py EIGENVAL.py
 
-お疲れさまでした。
+     python EIGENVAL.py
+
+「EIGENVAL.xlsx」が生成されるはずです。開くと、
+<img width="586" alt="スクリーンショット 2023-08-02 105455" src="https://github.com/MDGroup-WatanabeLab/image_for_mdpython/assets/138444525/3cf5b9c6-8ad1-4977-9399-dabd5288dda3">
+
+このようにバンド図が作成されます。お疲れさまでした。
 
 ## 4. VASPで第一原理MD
 　VASPで第一原理MDを行います。第一原理MDとは、簡単に言うと、正確だが遅い第一原理計算と、精度は悪いが速いMD計算を組み合わせた計算方法です。実際にやってみましょう。これまでと同様、ディレクトリを移動しましょう。
@@ -377,10 +382,19 @@ VASPの計算を開始しましょう。まずは、他の人が計算してい�
 
 q キーで元の画面に戻ります。
 確認出来たら、次のコマンドを打ちましょう。  
-vasp_std のパスは、WinSCPからコピーできます。
+vasp_std のパスは、以下の表の通りです。
+|PC名|vasp_std のパス|
+|:-----:|:-----:|
+|4.4| /home/thermal/VASP.6/vasp.6.4.0/bin/vasp_std |
+|4.5| /home/owner/VASP/vasp.6.4.0/bin/vasp_std |
 
+    # PC 4.4と4.5の場合
      nohup mpirun -np [並列コア数] [vasp_stdのパス] &
      disown
+     top
+
+    # PC 6.35の場合
+     run_vasp.sh
      top
 
 正しく計算が開始できていれば、次のようにファイルが生成されます。
@@ -400,8 +414,9 @@ vasp_std のパスは、WinSCPからコピーできます。
 
 時間経過で nohup.out に結果が記録されていくので、適宜確認しましょう。  
 また、計算が終わるまでは、入力ファイルの意味をvaspwikiで確認しておきましょう。  
-50タイムステップ分が実行されたら完了です。CONTCARをVESTAで開いてみてください。下の写真のように、少し原子が移動していることがわかると思います。  
-[写真のURL貼る]
+50タイムステップ分が実行されたら完了です。10分もかからずに終わると思います。  
+CONTCARをVESTAで開いてみてください。下の写真のように、わずかに原子が移動していることがわかると思います。  
+<img width="704" alt="スクリーンショット 2023-08-02 110328" src="https://github.com/MDGroup-WatanabeLab/image_for_mdpython/assets/138444525/e027747e-575c-4c9e-91db-723b305837de">
 
 続いて、圧力と体積、温度、エネルギー変化のグラフ化を行います。そのためのプログラムを次のコマンドでコピーします。
 
@@ -411,7 +426,7 @@ vasp_std のパスは、WinSCPからコピーできます。
 
      python PVTE_graph.py
 
-すこし時間がかかるかもしれません。「PVTE_graph.xlsx」というエクセルファイルが生成されます。開いてみると、圧力、体積、温度、エネルギー変化のグラフが作成されているはずです。
+「PVTE_graph.xlsx」というエクセルファイルが生成されます。開いてみると、圧力、体積、温度、エネルギー変化のグラフが作成されているはずです。
 お疲れさまでした。
 
 
