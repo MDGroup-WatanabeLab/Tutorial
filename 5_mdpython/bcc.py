@@ -57,7 +57,7 @@ for i in range(int(size[0])):
                 temp[2, 0] = (wyckoff[l][2] + k)/float(size[2]) 
                 Ap = np.dot(l_cubic.T, temp) # 行列計算により絶対座標へ
                 
-                if Ap[0, 0] >= 0 and Ap[0, 0] <= l_cubic[0, 0] and Ap[0, 0] != lattice_list[atomflag]*float(size[0]): # 
+                if Ap[0, 0] >=and Ap[0, 0] <= l_cubic[0, 0] and Ap[0, 0] != lattice_list[atomflag]*float(size[0]): # 
                     position.append("{} {} {}".format(Ap[0, 0], Ap[1, 0], Ap[2, 0]))
                     
 
