@@ -517,7 +517,9 @@ CONTCARをVESTAで開いてみてください。下の写真のように、わ�
 
      python PVTE_graph.py
 
-「PVTE_graph.xlsx」というエクセルファイルが生成されます。開いてみると、圧力、体積、温度、エネルギー変化のグラフが作成されているはずです。
+「PVTE_graph.xlsx」というエクセルファイルが生成されます。開いてみると、下の図のような圧力、体積、温度、エネルギー変化のグラフが作成されているはずです。  
+<img width="604" alt="スクリーンショット 2023-08-02 133526" src="https://github.com/MDGroup-WatanabeLab/image_for_mdpython/assets/138444525/164f693b-860c-4d7d-9336-c43b6a3788a1">  
+
 お疲れさまでした。
 
 
