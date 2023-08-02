@@ -86,7 +86,7 @@ LAMMPSでMD計算を行います。MD計算とは、古典力学に基づき、�
     3 : POSCAR
     Which format do you want to convert to ? :
 
-2を押せば、lmp形式に変換できます。ここで、電荷について聞かれるのですが、 __NaとClの電荷はそれぞれ1と―1にしてください。__ 名前は好きにしてください。  
+2を押せば、lmp形式に変換できます。変換後の名前は好きにしてください。ここで、電荷について聞かれるのですが、 __NaとClの電荷はそれぞれ1と―1にしてください。__   
 
 すでに必要なファイルはすべて用意できているはずなので、
 
@@ -155,7 +155,25 @@ q キーで元の画面に戻ります。次のコマンドを実行します。
 
      nohup mpirun -np 16 lmp_mpi < in.amorphous.NaCl &
 
-正常に動作すれば、「nohup.out」に出力結果が書き込まれます。1分半ほどで終わります。amorphous.final が生成されたらオッケーです。しかし、このままでは結晶が本当にアモルファス化しているかわかりません。ファイル形式を変更し、VESTAで見られるようにしましょう。再び、
+正しく計算が開始できていれば、次のようにファイルが生成されます。
+
+    Tutorial       
+        └── 1_lammps_run
+               └── ***.lmp
+               └── amorphous.final
+               └── convert_file.py
+               └── in.amorphous.NaCl
+               └── log.lammps
+               └── nacl_amorphous.xyz
+               └── nohup.out
+               └── POSCAR
+               └── rocksalt.py
+               └── stable.final
+        └── 2_lammps_run0
+        └── 3_VASP_DFT
+        └── 4_VASP_AIMD
+
+1分半ほどで終わります。amorphous.final が生成されたらオッケーです。しかし、このままでは結晶が本当にアモルファス化しているかわかりません。ファイル形式を変更し、VESTAで見られるようにしましょう。再び、
 
      python convert_file.py
 
@@ -219,6 +237,20 @@ POSCARの動径分関数（アモルファス化させる前）も出してみ�
 q キーで元の画面に戻ります。次のコマンドを実行します。
 
      nohup mpirun -np 16 lmp_mpi < in.Ge &
+
+正しく計算が開始できていれば、次のようにファイルが生成されます。
+
+    Tutorial       
+        └── 1_lammps_run
+        └── 2_lammps_run0
+               └── stable.final
+               └── nohup.out
+               └── log.lammps
+               └── in.Ge
+               └── Ge222.lmp
+               └── Ge.tersoff
+        └── 3_VASP_DFT
+        └── 4_VASP_AIMD
 
 計算が終了すると、「nohup.out」の下の方に、エネルギーが出力されます。
 
@@ -487,7 +519,6 @@ CONTCARをVESTAで開いてみてください。下の写真のように、わ�
 
 「PVTE_graph.xlsx」というエクセルファイルが生成されます。開いてみると、圧力、体積、温度、エネルギー変化のグラフが作成されているはずです。
 お疲れさまでした。
-
 
 
 ## 5. mdpythonを編集する  
