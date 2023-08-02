@@ -1,19 +1,21 @@
 # 渡邉研究室　計算班チュートリアル
 渡邉研究室計算班のチュートリアルです。まずは、自分専用のディレクトリを作成しましょう。自分の苗字などが良いでしょう。次のコマンドで作成できます。  
 
-    $ mkdir [苗字]
-    $ cd [作成したディレクトリ名]
+     mkdir [苗字]
+     cd [作成したディレクトリ名]
 
 
 Linuxコマンドの練習もかねて、ターミナルで次のコマンドを打つことで、チュートリアル用のディレクトリが作成されます。
 
-    $ git clone https://github.com/MDGroup-WatanabeLab/Tutorial.git
+     git clone https://github.com/MDGroup-WatanabeLab/Tutorial.git
 
 また、構造作成プログラムである、mdpythonもダウンロードしましょう。
 
-    $ git clone https://github.com/MDGroup-WatanabeLab/mdpython.git
+     git clone https://github.com/MDGroup-WatanabeLab/mdpython.git
 
+では、ディレクトリを移動しましょう。
 
+     cd Tutorial
 
 準備ができたら、早速、下のチュートリアルに進みましょう。  
 なお、渡邉研究室が所有しているPCのうち、LAMMPSとVASPが動作するのは、以下の表のとおりです。（※ 2023/07/30 現在）
@@ -29,16 +31,16 @@ Linuxコマンドの練習もかねて、ターミナルで次のコマンドを
 LAMMPSでMD計算を行います。MD計算とは、古典力学に基づき、運動方程式から原子の移動をシミュレーションする方法です。実際にやってみましょう。  
 まず、入力となる構造を用意します。次のコマンドで、ディレクトリを移動します。
 
-    $ cd 1_lammps_run
+     cd 1_lammps_run
 
 構造を作成するには、mdpythonのStructureから、所定のpythonプログラムが必要です。今回のチュートリアルでは、NaClの計算を行いたいので、岩塩型構造を作成できるプログラムを持ってきましょう。  
 次のコマンドを実行しましょう。
 
-    $ cp ../../mdpython/Structure/rocksalt.py rocksalt.py
+     cp ../../mdpython/Structure/rocksalt.py rocksalt.py
 
 コピー出来たら、早速実行しましょう。
 
-    $ python rocksalt.py
+     python rocksalt.py
 
 選択肢が出てくるので、
 
@@ -70,11 +72,11 @@ LAMMPSでMD計算を行います。MD計算とは、古典力学に基づき、�
 
 しかし、これから行うLAMMPSの計算では、mdl形式やlmp形式が必要です。ですので、ファイル形式を変換する必要があります。次のコマンドで、ファイルコンバーターをコピーしましょう。
 
-    $ cp ../../mdpython/Converter/convert_file.py convert_file.py
+     cp ../../mdpython/Converter/convert_file.py convert_file.py
 
 コンバーターを次のコマンドで実行しましょう。
 
-    $ python convert_file.py
+     python convert_file.py
 
 すると、POSCARが選択肢として出てくるはずです。0をおして、選択しましょう。どのファイル形式にするか聞かれるので、
 
@@ -84,11 +86,11 @@ LAMMPSでMD計算を行います。MD計算とは、古典力学に基づき、�
     3 : POSCAR
     Which format do you want to convert to ? :
 
-2を押せば、lmp形式に変換できます。名前は好きにしてください。  
+2を押せば、lmp形式に変換できます。ここで、電荷について聞かれるのですが、 __NaとClの電荷はそれぞれ1と―1にしてください。__ 名前は好きにしてください。  
 
 すでに必要なファイルはすべて用意できているはずなので、
 
-    $ ls
+     ls
 
 で、ディレクトリ内のファイルを確認しましょう。  
 おそらく、「in.amorphous.NaCl」というファイルがあると思います。  
@@ -147,25 +149,32 @@ LAMMPSでMD計算を行います。MD計算とは、古典力学に基づき、�
 わかったら、その部分を変え、計算を始めましょう。  
 まずは、他の人が計算していないか、次のコマンドで確認しましょう。
 
-    $ top
+     top
 
 q キーで元の画面に戻ります。次のコマンドを実行します。
 
-    $ nohup mpirun -np 16 lmp_mpi < in.amorphous.NaCl &
+     nohup mpirun -np 16 lmp_mpi < in.amorphous.NaCl &
 
-正常に動作すれば、「nohup.out」に出力結果が書き込まれます。終わるまで待ちましょう。amorphous.final が生成されたらオッケーです。しかし、このままでは結晶が本当にアモルファス化しているかわかりません。ファイル形式を変更し、VESTAで見られるようにしましょう。再び、
+正常に動作すれば、「nohup.out」に出力結果が書き込まれます。1分半ほどで終わります。amorphous.final が生成されたらオッケーです。しかし、このままでは結晶が本当にアモルファス化しているかわかりません。ファイル形式を変更し、VESTAで見られるようにしましょう。再び、
 
-    $ python convert_file.py
+     python convert_file.py
 
-で、__xyz形式__ に変更し、そのxyzファイルをVESTAで開いてみましょう。
+で、__xyz形式__ に変更しましょう。なお、id1とid2の原子はそれぞれna, clと答えてください。  
+変換出来たら、そのxyzファイルをVESTAで開いてみましょう。
 次のようになっているはずです。  
 <img width="662" alt="スクリーンショット 2023-08-02 100915" src="https://github.com/MDGroup-WatanabeLab/image_for_mdpython/assets/138444525/bf6dd118-a49e-4db2-82e0-29577567f912">
+
+次に、原子間結合距離などの情報が得られる __動径分布関数__ を出しましょう。先ほどのxyzファイルをOVITOで開きましょう。
+右上の「Add modification」から「Coordination analysis」で動径分関数が表示できます。「Cutoff radius」を10などに設定すれば、以下のような結果が得られるはずです。
+<img width="1127" alt="スクリーンショット 2023-08-02 103320" src="https://github.com/MDGroup-WatanabeLab/image_for_mdpython/assets/138444525/98d86d36-2a6e-470f-b31c-1b7403d92a4b">
+
+POSCARの動径分関数（アモルファス化させる前）も出してみましょう。結晶とアモルファスの動径分布関数にどｄのような違いがあるか考えましょう。
 
 ## 3. VASPでDFT計算  
 VASPでDFT計算を行います。量子力学に基づいた、正確だが時間がかかる計算である第一原理計算のうち、密度汎関数法（Density functional theory）を扱います。   
 ディレクトリを移動しましょう。
 
-    $ cd ../3_VASP_DFT
+     cd ../3_VASP_DFT
  
 すでに必要なファイルはすべて用意されています。各ファイルの中身は、以下の通りです。
 
@@ -235,14 +244,23 @@ POSCARをVESTAかOVITOで開き、どのような構造かあらかじめ確認�
 
 確認出来たら、 VASPの計算を開始しましょう。まずは、他の人が計算していないか、次のコマンドで確認します。
 
-    $ top
+     top
 
 q キーで元の画面に戻ります。確認出来たら、次のコマンドを打ちましょう。  
-vasp_std のパスは、WinSCPからコピーできます。
+vasp_std のパスは、以下の表の通りです。
+|PC名|vasp_std のパス|
+|:-----:|:-----:|
+|4.4| /home/thermal/VASP.6/vasp.6.4.0/bin/vasp_std |
+|4.5| /home/owner/VASP/vasp.6.4.0/bin/vasp_std |
 
-    $ nohup mpirun -np [並列コア数] [vasp_stdのパス] &
-    $ disown
-    $ top
+    # PC 4.4と4.5の場合
+     nohup mpirun -np [並列コア数] [vasp_stdのパス] &
+     disown
+     top
+
+    # PC 6.35の場合
+     run_vasp.sh
+     top
 
 正しく計算が開始できていれば、次のようにファイルが生成されます。
 
@@ -261,12 +279,16 @@ vasp_std のパスは、WinSCPからコピーできます。
 
 時間経過で nohup.out に結果が記録されていくので、適宜確認しましょう。  
 また、計算が終わるまでは、入力ファイルの意味をvaspwikiで確認しておきましょう。  
-エネルギーの計算が完了すれば終了です。お疲れさまでした。
+エネルギーの計算が完了すれば終了です。せっかくなので、エネルギーバンド図を作成しましょう。そのためのプログラムをコピーしましょう。
+
+    $ cp ../../mdpython/Tool4VASP/EIGENVAL.py EIGENVAL.py
+
+お疲れさまでした。
 
 ## 4. VASPで第一原理MD
 　VASPで第一原理MDを行います。第一原理MDとは、簡単に言うと、正確だが遅い第一原理計算と、精度は悪いが速いMD計算を組み合わせた計算方法です。実際にやってみましょう。これまでと同様、ディレクトリを移動しましょう。
 
-    $ cd ../4_VASP_AIMD
+     cd ../4_VASP_AIMD
 
 すでに必要なファイルはすべて用意されています。各ファイルの中身は、以下の通りです。
 
@@ -351,15 +373,15 @@ POTCARは、
  
 VASPの計算を開始しましょう。まずは、他の人が計算していないか、次のコマンドで確認しましょう。
 
-    $ top
+     top
 
 q キーで元の画面に戻ります。
 確認出来たら、次のコマンドを打ちましょう。  
 vasp_std のパスは、WinSCPからコピーできます。
 
-    $ nohup mpirun -np [並列コア数] [vasp_stdのパス] &
-    $ disown
-    $ top
+     nohup mpirun -np [並列コア数] [vasp_stdのパス] &
+     disown
+     top
 
 正しく計算が開始できていれば、次のようにファイルが生成されます。
 
@@ -383,11 +405,11 @@ vasp_std のパスは、WinSCPからコピーできます。
 
 続いて、圧力と体積、温度、エネルギー変化のグラフ化を行います。そのためのプログラムを次のコマンドでコピーします。
 
-    $ cp ../../mdpython/Tool4VASP/PVTE_graph.py PVTE_graph.py
+     cp ../../mdpython/Tool4VASP/PVTE_graph.py PVTE_graph.py
 
 プログラムを実行しましょう。
 
-    $ python PVTE_graph.py
+     python PVTE_graph.py
 
 すこし時間がかかるかもしれません。「PVTE_graph.xlsx」というエクセルファイルが生成されます。開いてみると、圧力、体積、温度、エネルギー変化のグラフが作成されているはずです。
 お疲れさまでした。
@@ -397,7 +419,7 @@ vasp_std のパスは、WinSCPからコピーできます。
 ## 5. mdpythonを編集する  
 先ほど、「rocksalt.py」を使ってもらいましたが、このプログラムは計算班が作成した「mdpython」というプログラム群の一つです。特級呪物にならないよう、追記や作成の仕方を確認しましょう。
 
-    $ cd ../5_mdpython
+     cd ../5_mdpython
 
 で移動しましょう。「bcc.py」と「fcc.py」という、二つのファイルがあると思います。この二つのファイルを開き、どのような処理を行っているか見てみましょう。  
 それでは、「bcc.py」に __リチウム（Li, a = 3.491 angs）__ 、「fcc.py」に __カルシウム（Ca, a = 5.81 angs）__ の構造を作成できるように、プログラムを追記しましょう。  
