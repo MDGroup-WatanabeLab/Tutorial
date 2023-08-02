@@ -93,7 +93,7 @@ LAMMPSでMD計算を行います。MD計算とは、古典力学に基づき、�
      ls
 
 で、ディレクトリ内のファイルを確認しましょう。  
-おそらく、「in.amorphous.NaCl」というファイルがあると思います。  
+「in.amorphous.NaCl」というファイルがあると思います。  
 中身は・・・
 
     package      omp 120
@@ -169,6 +169,63 @@ q キーで元の画面に戻ります。次のコマンドを実行します。
 <img width="1127" alt="スクリーンショット 2023-08-02 103320" src="https://github.com/MDGroup-WatanabeLab/image_for_mdpython/assets/138444525/98d86d36-2a6e-470f-b31c-1b7403d92a4b">
 
 POSCARの動径分関数（アモルファス化させる前）も出してみましょう。結晶とアモルファスの動径分布関数にどｄのような違いがあるか考えましょう。
+
+## 2. LAMMPSで一点計算
+今度は、LAMMPSの一点計算でエネルギーを計算してみましょう。まず、ディレクトリを移動しましょう。  
+
+     cd ../2_lammps_run0
+
+今回は、すでに構造を用意してありますので、すぐに計算が始められます。
+「in.Ge」の中身は、  
+
+     package omp 120
+     units metal
+     atom_style atomic
+     boundary p p p
+
+     read_data Ge222.lmp
+
+     pair_style      tersoff
+     pair_coeff      * * Ge.tersoff Ge 
+
+     neighbor 4.0 bin
+     neigh_modify  every 1 delaycheck yes
+
+     timestep 0.0001
+
+     velocity all create 300 318796474 mom yes rot yes dist gaussian
+     thermo_style custom step temp ke pe etotal press vol density
+     thermo 1000
+     fix          1 all nve
+     fix          2 all box/relax aniso 0.0 fixedpoint 0.0 0.0 0.0
+
+     min_style    cg
+     minimize     1e-25 1e-25 50000 100000
+
+     dump         1 all custom 1 stable.final id type xs ys zs
+     dump_modify  1 sort id
+
+     run 0
+
+     undump 1
+     unfix        1
+     unfix        2
+
+となっています。原子を固定し、エネルギーを算出できます。計算してみましょう。  
+まずは、他の人が計算していないか、次のコマンドで確認しましょう。
+
+     top
+
+q キーで元の画面に戻ります。次のコマンドを実行します。
+
+     nohup mpirun -np 16 lmp_mpi < in.Ge &
+
+計算が終了すると、「nohup.out」の下の方に、エネルギーが出力されます。
+
+     Step          Temp          KinEng         PotEng         TotEng         Press          Volume        Density    
+       407   300            2.4430167     -270.91251     -268.46949      1905.0693      1369.7294      5.6359886    
+
+この行で、各物理量がいくつになっているかわかります。このあと行うDFT計算の結果と比較してみましょう。
 
 ## 3. VASPでDFT計算  
 VASPでDFT計算を行います。量子力学に基づいた、正確だが時間がかかる計算である第一原理計算のうち、密度汎関数法（Density functional theory）を扱います。   

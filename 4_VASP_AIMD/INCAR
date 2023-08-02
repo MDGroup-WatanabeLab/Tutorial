@@ -1,7 +1,6 @@
 # Basic parameters
 ISMEAR = 0
 SIGMA = 0.05
-LREAL = Auto
 ISYM = 0
 NELMIN = 4
 NELM = 100

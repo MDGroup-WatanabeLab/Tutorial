@@ -2,25 +2,35 @@
 チュートリアルの解答です。計算の意味や、プログラムの変更すべき点などを記しています。答え合わせや、確認、ミーティング資料の作成に役立ててください。
 
 ## 1. LAMMPSでMD計算
+まず、変えるべき場所は、__「read_data」の行__ です。構造を読み取るための行なので、自分で作ったlmpファイルの名前に変更しましょう。
+
+次に、計算の内容を確認します。要点としては、
+ - 周期的境界条件あり
+ - Born-Mayer-Huggins Potential を使用
+ - NVEアンサンブルで構造最適化
+ - NVTアンサンブルで300K、1[ps]のMD
+ - NVTアンサンブルで2000K、10[ps]のMD
+ - NVTアンサンブルで2000Kから300Kへ冷却、5[ps]のMD
 
 ## 2. LAMMPSで一点計算
+特に確認すべき点はありません。
+
 
 ## 3. VASPでDFT計算
 計算の内容を確認します。
 
     # Basic parameters
-    ISMEAR = 0        :
-    SIGMA = 0.05      :
-    LREAL = Auto      :
-    ISYM = 0          :
-    NELMIN = 4        :
-    NELM = 100        :
-    EDIFF = 1E-6      :
-    ALGO = VeryFast   :
-    PREC = Accurate   :
+    ISMEAR = 0        : Fermi smearing を使用
+    SIGMA = 0.05      : Smearing 用のパラメーター
+    ISYM = 0          : not use symmetry (setting for MD)
+    NELMIN = 4        : SCF計算の最小回数
+    NELM = 100        : SCF計算の最大回数
+    EDIFF = 1E-6      : SCF計算の終了条件
+    ALGO = VeryFast   : RMM-DIIS algorithm を使用
+    PREC = Accurate   : egg-box effect による誤差を減らす
 
     # Not change position
-    IBRION = -1
+    IBRION = -1       : 原子位置を動かさない
 
 ## 4. VASPで第一原理MD
 計算の内容を確認します。MDに関するパラメーターの意味は以下の通りです。
