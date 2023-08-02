@@ -66,7 +66,7 @@ LAMMPSでMD計算を行います。MD計算とは、古典力学に基づき、�
 と打てば（>>は不要）、NaClの構造がPOSCAR形式で作成できます。  
 　作成した構造がどのようになっているか確認するため、POSCARファイルを __自分のPCへコピー__ し、VESTAかOVITOで確認しましょう。
 次のようになっているはずです。  
-[写真のURL貼る]  
+<img width="713" alt="スクリーンショット 2023-08-02 100648" src="https://github.com/MDGroup-WatanabeLab/image_for_mdpython/assets/138444525/a2f7a26c-115d-45ed-81f3-3f1161c5a076">  
 
 しかし、これから行うLAMMPSの計算では、mdl形式やlmp形式が必要です。ですので、ファイル形式を変換する必要があります。次のコマンドで、ファイルコンバーターをコピーしましょう。
 
@@ -159,7 +159,7 @@ q キーで元の画面に戻ります。次のコマンドを実行します。
 
 で、__xyz形式__ に変更し、そのxyzファイルをVESTAで開いてみましょう。
 次のようになっているはずです。  
-[写真のURL貼る]
+<img width="662" alt="スクリーンショット 2023-08-02 100915" src="https://github.com/MDGroup-WatanabeLab/image_for_mdpython/assets/138444525/bf6dd118-a49e-4db2-82e0-29577567f912">
 
 ## 3. VASPでDFT計算  
 VASPでDFT計算を行います。量子力学に基づいた、正確だが時間がかかる計算である第一原理計算のうち、密度汎関数法（Density functional theory）を扱います。   
@@ -231,7 +231,7 @@ POTCARは、
 
 
 POSCARをVESTAかOVITOで開き、どのような構造かあらかじめ確認しましょう。次のような構造がみられるはずです。  
-[写真のURL貼る]  
+<img width="701" alt="スクリーンショット 2023-08-02 101109" src="https://github.com/MDGroup-WatanabeLab/image_for_mdpython/assets/138444525/289278ab-1744-4d8b-b14d-511bc68866fe">
 
 確認出来たら、 VASPの計算を開始しましょう。まずは、他の人が計算していないか、次のコマンドで確認します。
 
