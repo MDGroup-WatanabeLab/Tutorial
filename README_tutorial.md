@@ -96,7 +96,6 @@ LAMMPSでMD計算を行います。MD計算とは、古典力学に基づき、�
 「in.amorphous.NaCl」というファイルがあると思います。  
 中身は・・・
 
-    package      omp 120
     units        metal
     boundary     p p p
     atom_style   charge
@@ -196,7 +195,6 @@ POSCARの動径分関数（アモルファス化させる前）も出してみ�
 今回は、すでに構造を用意してありますので、すぐに計算が始められます。
 「in.Ge」の中身は、  
 
-     package omp 120
      units metal
      atom_style atomic
      boundary p p p
@@ -379,7 +377,9 @@ vasp_std のパスは、以下の表の通りです。
 「EIGENVAL.xlsx」が生成されるはずです。開くと、  
 <img width="586" alt="スクリーンショット 2023-08-02 105455" src="https://github.com/MDGroup-WatanabeLab/image_for_mdpython/assets/138444525/3cf5b9c6-8ad1-4977-9399-dabd5288dda3">
 
-このようにバンド図が作成されます。お疲れさまでした。
+このようにバンド図が作成されます。  
+では、先ほどのLAMMPSの一点計算の結果と比較しましょう。両者ともほぼ同じ値をとっているはずです。
+お疲れさまでした。
 
 ## 4. VASPで第一原理MD
 　VASPで第一原理MDを行います。第一原理MDとは、簡単に言うと、正確だが遅い第一原理計算と、精度は悪いが速いMD計算を組み合わせた計算方法です。実際にやってみましょう。これまでと同様、ディレクトリを移動しましょう。
