@@ -277,6 +277,7 @@ INCARは、
     EDIFF = 1E-6
     ALGO = VeryFast
     PREC = Accurate
+    LREAL = Auto
 
     # Not change position
     IBRION = -1
@@ -378,7 +379,9 @@ vasp_std のパスは、以下の表の通りです。
 <img width="586" alt="スクリーンショット 2023-08-02 105455" src="https://github.com/MDGroup-WatanabeLab/image_for_mdpython/assets/138444525/3cf5b9c6-8ad1-4977-9399-dabd5288dda3">
 
 このようにバンド図が作成されます。  
-では、先ほどのLAMMPSの一点計算の結果と比較しましょう。両者ともほぼ同じ値をとっているはずです。
+最後に、 __先ほどのLAMMPSの一点計算の結果と比較しましょう。__ 「nohup.out」の下の方にエネルギーの計算結果が出力されています。  
+
+両者とも、-260～-280eV ほどの内部エネルギー
 お疲れさまでした。
 
 ## 4. VASPで第一原理MD
@@ -410,6 +413,7 @@ INCARは、
     EDIFF = 1E-6
     ALGO = VeryFast
     PREC = Accurate
+    LREAL = Auto
 
     # MD
     IBRION = 0
@@ -506,8 +510,8 @@ vasp_std のパスは、以下の表の通りです。
 時間経過で nohup.out に結果が記録されていくので、適宜確認しましょう。  
 また、計算が終わるまでは、入力ファイルの意味をvaspwikiで確認しておきましょう。  
 50タイムステップ分が実行されたら完了です。10分もかからずに終わると思います。  
-CONTCARをVESTAで開いてみてください。下の写真のように、わずかに原子が移動していることがわかると思います。  
-<img width="704" alt="スクリーンショット 2023-08-02 110328" src="https://github.com/MDGroup-WatanabeLab/image_for_mdpython/assets/138444525/e027747e-575c-4c9e-91db-723b305837de">
+CONTCARをVESTAで開いてみてください。下の写真では、左が計算前（POSCAR）、右が計算後（CONTCAR）の構造を表しています。わずかに原子が移動していることがわかると思います。原子数が減っているようにも見えますが、これは周期的境界条件により、POSCARでは境界線上の原子が表示されているためです。  
+![AIMD_change](https://github.com/MDGroup-WatanabeLab/image_for_mdpython/assets/138444525/71b6139c-69c1-497b-bcf2-61e3eba1e8fa)
 
 続いて、圧力と体積、温度、エネルギー変化のグラフ化を行います。そのためのプログラムを次のコマンドでコピーします。
 
