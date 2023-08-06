@@ -193,39 +193,39 @@ POSCARの動径分関数（アモルファス化させる前）も出してみ�
      cd ../2_lammps_run0
 
 今回は、すでに構造を用意してありますので、すぐに計算が始められます。
-「in.Ge」の中身は、  
+入力条件を示す「in.Ge」の中身は、  
 
-     units metal
-     atom_style atomic
-     boundary p p p
+     units           metal
+     atom_style      atomic
+     boundary        p p p
 
-     read_data Ge222.lmp
+     read_data       Ge222.lmp
 
      pair_style      tersoff
      pair_coeff      * * Ge.tersoff Ge 
 
-     neighbor 4.0 bin
-     neigh_modify  every 1 delaycheck yes
+     neighbor        4.0 bin
+     neigh_modify    every 1 delay 0 check yes
 
-     timestep 0.0001
+     timestep        0.0001
 
-     velocity all create 300 318796474 mom yes rot yes dist gaussian
-     thermo_style custom step temp ke pe etotal press vol density
+     velocity        all create 300 318796474 mom yes rot yes dist gaussian
+     thermo_style    custom step temp ke pe etotal press vol density
      thermo 1000
-     fix          1 all nve
-     fix          2 all box/relax aniso 0.0 fixedpoint 0.0 0.0 0.0
+     fix             1 all nve
+     fix             2 all box/relax aniso 0.0 fixedpoint 0.0 0.0 0.0
 
-     min_style    cg
-     minimize     1e-25 1e-25 50000 100000
+     min_style       cg
+     minimize        1e-25 1e-25 50000 100000
 
-     dump         1 all custom 1 stable.final id type xs ys zs
-     dump_modify  1 sort id
+     dump            1 all custom 1 stable.final id type xs ys zs
+     dump_modify     1 sort id
 
      run 0
 
-     undump 1
-     unfix        1
-     unfix        2
+     undump          1
+     unfix           1
+     unfix           2
 
 となっています。原子を固定し、エネルギーを算出できます。計算してみましょう。  
 まずは、他の人が計算していないか、次のコマンドで確認しましょう。
