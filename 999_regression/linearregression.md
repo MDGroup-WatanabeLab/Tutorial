@@ -739,7 +739,7 @@ $`n`$個のデータ$`(x_{11},x_{21},...,x_{p1},y_1),(x_{12},x_{22},...,x_{p2},y
         \right)
 ```
 
-変数のデータ$`\boldsymbol {X}`$は以下のp+1行n列行列で表される。
+変数のデータ$`\boldsymbol {X}`$は以下のn行p+1列行列で表される。
 ```math
     \boldsymbol {X} =
         \left(
@@ -797,3 +797,18 @@ $`i`$番目のデータと回帰式との誤差$`\varepsilon_i`$は<br>
         &= \boldsymbol {y}' \cdot \boldsymbol {y} - 2 \boldsymbol {y}' \cdot [\boldsymbol {X} \cdot \boldsymbol {\beta}] + \boldsymbol {\beta}'\cdot \boldsymbol {X}'\cdot\boldsymbol {X}\cdot\boldsymbol {\beta} 
     \end{aligned}
 ```
+で、これをベクトル$`\boldsymbol {\beta}`$について微分すると<br>
+```math
+    \frac{
+        \partial S
+    }
+    {
+        \partial \boldsymbol {\beta}
+    }
+    =
+    -2 \boldsymbol {X}' \boldsymbol {y} + 2[\boldsymbol {X}'\boldsymbol {X}]\boldsymbol {\beta}=\boldsymbol {0}
+```
+```math
+    [\boldsymbol {X}'\boldsymbol {X}]\boldsymbol {\beta} = \boldsymbol {X}' \boldsymbol {y}
+```
+こーなるんだって、わろた<br>
