@@ -47,13 +47,13 @@ $`i`$番目のデータと回帰式との誤差$`\varepsilon_i`$は<br>
         \displaystyle \sum^{n}_{i=1} x_i \sum^{n}_{i=1} y_i - n\sum^{n}_{i=1} x_iy_i
         }
         {
-            (\displaystyle \sum^{n}_{i=1} x_i)^2 - n\sum^{n}_{i=1} {x_i}^2
+            \left(\displaystyle \sum^{n}_{i=1} x_i \right)^2 - \displaystyle n \sum^{n}_{i=1} {x_i}^2
         } \cr
         b = \frac{
         \displaystyle \sum^{n}_{i=1} x_i\sum^{n}_{i=1} x_iy_i - \sum^{n}_{i=1} {x_i}^2 \sum^{n}_{i=1} y_i
         }
         {
-            (\displaystyle \sum^{n}_{i=1} x_i)^2 - n\sum^{n}_{i=1} {x_i}^2
+            \left(\displaystyle \sum^{n}_{i=1} x_i \right)^2 - \displaystyle n \sum^{n}_{i=1} {x_i}^2
         }
     \end{matrix}
 \right\}
@@ -277,7 +277,7 @@ $`i`$番目のデータと回帰式との誤差$`\varepsilon_i`$は<br>
 でなんやかんやすると、直接パラメータ$`a`$、$`b`$と$`c`$が出せる。<br>
 
 
-### 重回帰分析の導出
+### 二変数の重回帰分析の導出
 改めて二乗和(誤差関数)は<br>
 ```math
 \displaystyle S=\sum^{n}_{i=1} {\varepsilon_i}^2=\sum^{n}_{i=1} \{y_i - (ax_i + bw_i + c)\}^2
@@ -485,7 +485,7 @@ $`b`$も見た目きれいにした後、$`a`$をつっこみたい
 
 ```math
 b = \frac{
-        (\displaystyle \frac{1}{n}\sum^{n}_{i=1} w_i\sum^{n}_{i=1} y_i - \sum^{n}_{i=1} w_iy_i) 
+        \left(\displaystyle \frac{1}{n}\sum^{n}_{i=1} w_i\sum^{n}_{i=1} y_i - \sum^{n}_{i=1} w_iy_i \right) 
     }
     {
         \displaystyle \frac{1}{n} (\sum^{n}_{i=1} w_i)^2 - \sum^{n}_{i=1} {w_i}^2
@@ -688,32 +688,112 @@ $`a`$について<br>
 ```
 なんかこう、行列でまとめられそうじゃね？<br>
 ```math
-    (
+    \left(
         \begin{matrix}
             \sigma_x^2 & \sigma_{wx} \\ 
             \sigma_{wx} & \sigma_w^2
         \end{matrix}
-    )
+    \right)
     \cdot
-    (
+    \left(
         \begin{matrix}
             a \\ 
             b
         \end{matrix}
-    )
+    \right)
     =
-    (
+    \left(
         \begin{matrix}
             \sigma_{xy} \\ 
             \sigma_{wy}
         \end{matrix}
-    )
+    \right)
 ```
 ね？きれいになったでしょ？<br>
 ~~**わかるかこんなもん**~~<br>
-ちなこの行列$`(
+ちなこの行列$`\left(
         \begin{matrix}
             \sigma_x^2 & \sigma_{wx} \\ 
             \sigma_{wx} & \sigma_w^2
         \end{matrix}
-    )`$は**分散共分散行列**とか名前がついていたりする。
+    \right)`$は**分散共分散行列**とか名前がついていたりする。
+
+### 変数がp個の重回帰分析
+
+変数がp個もあると、ベクトルを使って
+
+$`n`$個のデータ$`(x_{11},x_{21},...,x_{p1},y_1),(x_{12},x_{22},...,x_{p2},y_2),...,(x_{1n},x_{2n},...,x_{pn},y_n)`$に対し、<br>
+回帰式$`y(x) = \beta_0 + \beta_1x_1 + \beta_2x_2 + ... + \beta_px_p`$に回帰する。<br>
+これもパラメータ$`\beta_0,\beta_1,...,\beta_p`$はすべて一次なので線形回帰<br>
+
+データ$`\boldsymbol {y}`$は以下のn列ベクトルで表される。
+```math
+    \boldsymbol {y} = 
+        \left(
+            \begin{matrix}
+                y_1 \\
+                y_2 \\
+                \vdots \\
+                y_n
+            \end{matrix}
+        \right)
+```
+
+変数のデータ$`\boldsymbol {X}`$は以下のp+1行n列行列で表される。
+```math
+    \boldsymbol {X} =
+        \left(
+            \begin{matrix}
+                1 & x_{11} & x_{21} & \cdots & x_{p1}\\
+                1 & x_{12} & x_{22} & \cdots & x_{p2}\\
+                \vdots & \vdots & \vdots & \ddots & \vdots\\
+                1 & x_{1n} & x_{2n} & \cdots & x_{pn}
+            \end{matrix}
+        \right)
+```
+
+パラメータ$`\boldsymbol {\beta}`$は以下のp+1列ベクトルで表される。
+```math
+    \boldsymbol {\beta} =
+        \left(
+            \begin{matrix}
+                \beta_0 \\
+                \beta_1 \\
+                \beta_2 \\
+                \vdots \\
+                \beta_p
+            \end{matrix}
+        \right)
+```
+
+$`i`$番目のデータと回帰式との誤差$`\varepsilon_i`$は<br>
+```math
+    \varepsilon_i = y_i - (\beta_0 + \beta_1x_{1i} + \beta_2x_{2i} + ... + \beta_px_{pi})
+```
+
+これをベクトル$`\boldsymbol {\varepsilon}`$に拡張して、全データに関しての誤差にすると
+```math
+    \boldsymbol {\varepsilon} =
+        \left(
+            \begin{matrix}
+                y_1 - (\beta_0 + \beta_1x_{11} + \beta_2x_{21} + ... + \beta_px_{p1}) \\
+                y_2 - (\beta_0 + \beta_1x_{12} + \beta_2x_{22} + ... + \beta_px_{p2}) \\
+                \vdots \\
+                y_n - (\beta_0 + \beta_1x_{1n} + \beta_2x_{2n} + ... + \beta_px_{pn})
+            \end{matrix}
+        \right)
+```
+これは、$`\boldsymbol {y}`$と$`\boldsymbol {X}`$、$`\boldsymbol {\beta}`$で表現可能
+```math
+    \boldsymbol {\varepsilon} = \boldsymbol {y} - \boldsymbol {X} \cdot \boldsymbol {\beta}
+```
+で、その二乗和(誤差関数)は$`\boldsymbol {\varepsilon}`$の内積で求まるよね<br>
+```math
+    \begin{aligned}
+        S &= \displaystyle \sum^n_{j=1} {\varepsilon_j}^2 \cr
+        &= \boldsymbol {\varepsilon}'\cdot \boldsymbol {\varepsilon} \cr
+        &= [\boldsymbol {y} - \boldsymbol {X} \cdot \boldsymbol {\beta}]'\cdot[\boldsymbol {y} - \boldsymbol {X} \cdot \boldsymbol {\beta}] \cr
+        &= \boldsymbol {y}' \cdot \boldsymbol {y} - \boldsymbol {y}' \cdot [\boldsymbol {X} \cdot \boldsymbol {\beta}] - [\boldsymbol {X} \cdot \boldsymbol {\beta}]' \cdot \boldsymbol {y} + [\boldsymbol {X} \cdot \boldsymbol {\beta}]' \cdot [\boldsymbol {X} \cdot \boldsymbol {\beta}] \cr 
+        &= \boldsymbol {y}' \cdot \boldsymbol {y} - 2 \boldsymbol {y}' \cdot [\boldsymbol {X} \cdot \boldsymbol {\beta}] + \boldsymbol {\beta}'\cdot \boldsymbol {X}'\cdot\boldsymbol {X}\cdot\boldsymbol {\beta} 
+    \end{aligned}
+```
