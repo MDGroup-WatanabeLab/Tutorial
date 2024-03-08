@@ -1,11 +1,31 @@
 # 渡邉研究室　計算班チュートリアル
-渡邉研究室計算班のチュートリアルです。まずは、自分専用のディレクトリを作成しましょう。自分の苗字などが良いでしょう。次のコマンドで作成できます。  
+<div style="text-align: right;">
+文責：内藤　　最終更新日： 2024/03/08
+</div>
+<br>  
 
-     mkdir [苗字]
+&emsp;渡邉研究室計算班のチュートリアルです。すでに、自分のPCに、SSH接続が可能な環境（ __CISCO AnyConnect, Teraterm, WinSCP__ ）と結晶構造の可視化ツール（ __VESTA, OVITO__ ）が準備されていることが前提です。まだの場合は先述の5つを用意してください。  
+&emsp;また、渡邉研究室が所有しているPCのうち、LAMMPSとVASPが動作するのは、以下の表のとおりです。（※ 2024/03/08 現在）
+
+| | LAMMPS |   VASP 6.4.0   |  
+| :----: | :----: | :----: |
+|PC名<br>（末尾）|4.4, 4.5, 6.3, 6.34, 6.35|6.3, 4.4, 4.5, 6.35|
+
+この表に対応したPCでチュートリアルを行いましょう。詳しい性能差は、Boxの「計算班PCリスト.xlsx」を参照してください。  
+&emsp;ネットワーク接続手順のおさらいですが、Teratermで __6.2PC__ にログインしましょう。ログイン出来たら、次のコマンドを実行し、他のPCに移動しましょう。[ ]は不要です。
+
+     ssh -X -Y [ユーザー名]@[IPアドレス]
+
+パスワードの入力をしたら（画面には入力した文字は表示されません）、Enterキーを押し、チュートリアルを行いたいPCへ移動します。
+<br>  
+  
+&emsp;まずは、自分専用のディレクトリを作成しましょう。__Teraterm__ にて、次のコマンドで作成できます。[ ] は不要です。  
+
+     mkdir [苗字とか（ローマ字）]
      cd [作成したディレクトリ名]
 
 
-Linuxコマンドの練習もかねて、ターミナルで次のコマンドを打つことで、チュートリアル用のディレクトリが作成されます。
+次のコマンドを打つことで、チュートリアル用のディレクトリが作成されます。
 
      git clone https://github.com/MDGroup-WatanabeLab/Tutorial.git
 
@@ -17,15 +37,7 @@ Linuxコマンドの練習もかねて、ターミナルで次のコマンドを
 
      cd Tutorial
 
-準備ができたら、早速、下のチュートリアルに進みましょう。  
-なお、渡邉研究室が所有しているPCのうち、LAMMPSとVASPが動作するのは、以下の表のとおりです。（※ 2023/07/30 現在）
-
-| | LAMMPS |   VASP 6.4.0   |  
-| :----: | :----: | :----: |
-|PC名<br>（末尾）|4.4, 4.5, 6.3, 6.34, 6.35|4.4, 4.5, 6.35|
-
-この表に対応したPCでチュートリアルを行いましょう。  
-詳しい性能差は、Boxの「計算班PCリスト.xlsx」を参照してください。
+準備ができたら、早速、下のチュートリアルに進みましょう。
 
 ## 1. LAMMPSでMD計算  
 LAMMPSでMD計算を行います。MD計算とは、古典力学に基づき、運動方程式から原子の移動をシミュレーションする方法です。実際にやってみましょう。  
@@ -96,7 +108,6 @@ LAMMPSでMD計算を行います。MD計算とは、古典力学に基づき、�
 「in.amorphous.NaCl」というファイルがあると思います。  
 中身は・・・
 
-    package      omp 120
     units        metal
     boundary     p p p
     atom_style   charge
@@ -194,40 +205,39 @@ POSCARの動径分関数（アモルファス化させる前）も出してみ�
      cd ../2_lammps_run0
 
 今回は、すでに構造を用意してありますので、すぐに計算が始められます。
-「in.Ge」の中身は、  
+入力条件を示す「in.Ge」の中身は、  
 
-     package omp 120
-     units metal
-     atom_style atomic
-     boundary p p p
+     units           metal
+     atom_style      atomic
+     boundary        p p p
 
-     read_data Ge222.lmp
+     read_data       Ge222.lmp
 
      pair_style      tersoff
      pair_coeff      * * Ge.tersoff Ge 
 
-     neighbor 4.0 bin
-     neigh_modify  every 1 delaycheck yes
+     neighbor        4.0 bin
+     neigh_modify    every 1 delay 0 check yes
 
-     timestep 0.0001
+     timestep        0.0001
 
-     velocity all create 300 318796474 mom yes rot yes dist gaussian
-     thermo_style custom step temp ke pe etotal press vol density
+     velocity        all create 300 318796474 mom yes rot yes dist gaussian
+     thermo_style    custom step temp ke pe etotal press vol density
      thermo 1000
-     fix          1 all nve
-     fix          2 all box/relax aniso 0.0 fixedpoint 0.0 0.0 0.0
+     fix             1 all nve
+     fix             2 all box/relax aniso 0.0 fixedpoint 0.0 0.0 0.0
 
-     min_style    cg
-     minimize     1e-25 1e-25 50000 100000
+     min_style       cg
+     minimize        1e-25 1e-25 50000 100000
 
-     dump         1 all custom 1 stable.final id type xs ys zs
-     dump_modify  1 sort id
+     dump            1 all custom 1 stable.final id type xs ys zs
+     dump_modify     1 sort id
 
      run 0
 
-     undump 1
-     unfix        1
-     unfix        2
+     undump          1
+     unfix           1
+     unfix           2
 
 となっています。原子を固定し、エネルギーを算出できます。計算してみましょう。  
 まずは、他の人が計算していないか、次のコマンドで確認しましょう。
@@ -279,6 +289,7 @@ INCARは、
     EDIFF = 1E-6
     ALGO = VeryFast
     PREC = Accurate
+    LREAL = Auto
 
     # Not change position
     IBRION = -1
@@ -335,8 +346,7 @@ POSCARをVESTAかOVITOで開き、どのような構造かあらかじめ確認�
 
      top
 
-q キーで元の画面に戻ります。確認出来たら、次のコマンドを打ちましょう。  
-vasp_std のパスは、以下の表の通りです。
+q キーで元の画面に戻ります。確認出来たら、次のコマンドを打ちましょう。[ ] は不要です。また、vasp_std のパスは、以下の表の通りです。
 |PC名|vasp_std のパス|
 |:-----:|:-----:|
 |4.4| /home/thermal/VASP.6/vasp.6.4.0/bin/vasp_std |
@@ -379,7 +389,10 @@ vasp_std のパスは、以下の表の通りです。
 「EIGENVAL.xlsx」が生成されるはずです。開くと、  
 <img width="586" alt="スクリーンショット 2023-08-02 105455" src="https://github.com/MDGroup-WatanabeLab/image_for_mdpython/assets/138444525/3cf5b9c6-8ad1-4977-9399-dabd5288dda3">
 
-このようにバンド図が作成されます。お疲れさまでした。
+このようにバンド図が作成されます。横軸は波数 [/angs]、縦軸はエネルギー [eV]を表しています。それぞれの線は各電子軌道ごとのエネルギーを表しています。    
+最後に、 __先ほどのLAMMPSの一点計算の結果と比較しましょう。__ 「nohup.out」の下の方にエネルギーの計算結果が出力されています。  
+両者とも、内部エネルギーは、-260～-280eV ほどになっているはずです。  
+お疲れさまでした。
 
 ## 4. VASPで第一原理MD
 　VASPで第一原理MDを行います。第一原理MDとは、簡単に言うと、正確だが遅い第一原理計算と、精度は悪いが速いMD計算を組み合わせた計算方法です。実際にやってみましょう。これまでと同様、ディレクトリを移動しましょう。
@@ -410,6 +423,7 @@ INCARは、
     EDIFF = 1E-6
     ALGO = VeryFast
     PREC = Accurate
+    LREAL = Auto
 
     # MD
     IBRION = 0
@@ -506,8 +520,8 @@ vasp_std のパスは、以下の表の通りです。
 時間経過で nohup.out に結果が記録されていくので、適宜確認しましょう。  
 また、計算が終わるまでは、入力ファイルの意味をvaspwikiで確認しておきましょう。  
 50タイムステップ分が実行されたら完了です。10分もかからずに終わると思います。  
-CONTCARをVESTAで開いてみてください。下の写真のように、わずかに原子が移動していることがわかると思います。  
-<img width="704" alt="スクリーンショット 2023-08-02 110328" src="https://github.com/MDGroup-WatanabeLab/image_for_mdpython/assets/138444525/e027747e-575c-4c9e-91db-723b305837de">
+CONTCARをVESTAで開いてみてください。下の写真では、左が計算前（POSCAR）、右が計算後（CONTCAR）の構造を表しています。わずかに原子が移動していることがわかると思います。原子数が減っているようにも見えますが、これは周期的境界条件により、POSCARでは境界線上の原子が表示されているためです。  
+![AIMD_change](https://github.com/MDGroup-WatanabeLab/image_for_mdpython/assets/138444525/71b6139c-69c1-497b-bcf2-61e3eba1e8fa)
 
 続いて、圧力と体積、温度、エネルギー変化のグラフ化を行います。そのためのプログラムを次のコマンドでコピーします。
 
