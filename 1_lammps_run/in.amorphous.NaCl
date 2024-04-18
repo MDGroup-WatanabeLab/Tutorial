@@ -25,7 +25,7 @@ undump       1
 unfix        1
 unfix        2
 
-dump         1 all xyz 100 nacl_amorphous.xyz
+dump         1 all atom 100 nacl_amorphous.xyz
 dump_modify  1 sort id element Na Cl append yes
 fix          1 all nvt temp 300 300 0.05
 run          10000
