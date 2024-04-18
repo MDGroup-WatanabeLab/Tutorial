@@ -3,14 +3,14 @@ boundary     p p p
 atom_style   charge
 atom_modify  sort 10000 1.0
 read_data    NaCl444.lmp
-pair_style   born/coul/long/omp 10.0
+pair_style   born/coul/long 10.0
 kspace_style ewald 1e-5
 pair_coeff   1 1 0.013747 0.3170 3.300 1.036 0 10.0
 pair_coeff   1 2 0.013747 0.3170 3.610 3.109 0 10.0
 pair_coeff   2 2 0.013747 0.3170 3.920 9.328 0 10.0
 neighbor     4.0 bin
 neigh_modify every 1 delay 0 check yes
-timestep     0.0001
+timestep     0.001
 velocity     all create 300 318796474 mom yes rot yes dist gaussian
 thermo_style custom step temp ke pe etotal press vol density
 thermo       1000
@@ -25,15 +25,17 @@ undump       1
 unfix        1
 unfix        2
 
-dump         1 all xyz 100 nacl_amorphous.xyz
+dump         1 all atom 100 nacl_amorphous.xyz
 dump_modify  1 sort id element Na Cl append yes
 fix          1 all nvt temp 300 300 0.05
 run          10000
 unfix        1
-fix          1 all nvt temp 2000 2000 0.05
+velocity     all create 1500 379278227 mom yes rot yes dist gaussian
+fix          1 all nvt temp 1500 1500 0.05
 run          100000
 unfix        1
-fix          1 all npt temp 2000 300 0.05 x 0 0 0.05 y 0 0 0.05 z 0 0 0.05
+velocity     all create 1500 379278227 mom yes rot yes dist gaussian
+fix          1 all npt temp 1500 300 0.05 x 0 0 0.05 y 0 0 0.05 z 0 0 0.05
 run          50000
 unfix        1
 dump         2 all custom 1 amorphous.final id type xs ys zs
