@@ -8,6 +8,6 @@ band = BSPlotter(bandstr).get_plot(ylim=[-12,10])
 
 band.plot()
 
-plt.savefig("band.jpg")
+plt.savefig("band.png")
 
 plt.show()
