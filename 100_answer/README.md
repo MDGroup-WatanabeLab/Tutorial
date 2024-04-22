@@ -8,84 +8,59 @@
  - 周期的境界条件あり
  - Born-Mayer-Huggins Potential を使用
  - NVEアンサンブルで構造最適化
- - NVTアンサンブルで300K、1[ps]のMD
- - NVTアンサンブルで2000K、10[ps]のMD
- - NVTアンサンブルで2000Kから300Kへ冷却、5[ps]のMD
-
-## 2. LAMMPSで一点計算
-計算の内容だけ簡単に。  
-Ge64個のダイアモンド構造を、Tersoffポテンシャルを用いてエネルギーの計算をしています。要点としては、
- - タイムステップは __0.1 fs__
- - アンサンブルは __NVE__
+ - NVTアンサンブルで300K、10[ps]のMD
+ - NVTアンサンブルで1500K、100[ps]のMD
+ - NVTアンサンブルで1500Kから300Kへ冷却、50[ps]のMD
 
 
-## 3. VASPでDFT計算
+## 2. VASPでDFT計算
 計算の内容を確認します。
+１回目の計算の内容は、
 
-    # Basic parameters
-    ISMEAR = 0        : Fermi smearing を使用
-    SIGMA = 0.05      : Smearing 用のパラメーター
-    ISYM = 0          : not use symmetry (setting for MD)
-    NELMIN = 4        : SCF計算の最小回数
-    NELM = 100        : SCF計算の最大回数
-    EDIFF = 1E-6      : SCF計算の終了条件
-    ALGO = VeryFast   : RMM-DIIS algorithm を使用
-    PREC = Accurate   : egg-box effect による誤差を減らす
+    ISMEAR = 0              : Fermi smearing を使用
+    SIGMA = 0.1             : Smearing 用のパラメーター
 
-    # Not change position
-    IBRION = -1       : 原子位置を動かさない
+２回目の計算の内容は、
 
-## 4. VASPで第一原理MD
+    System = fcc Si         : 系の名称設定
+    ICHARG = 11             : CHGCARを読む
+    ISMEAR = 0              : Fermi smearing を使用
+    SIGMA = 0.1             : Smearing 用のパラメーター
+    LORBIT = 11             : PAW法を用いてProjectionを行う
+
+
+## 3. VASPで第一原理MD
 計算の内容を確認します。MDに関するパラメーターの意味は以下の通りです。
 
+    # Basic parameters
+    ISMEAR = 0              : Fermi Smearingを使用
+    SIGMA = 0.05            : Smearingの幅
+    LREAL = Auto            : ROPT=-5E-4 に設定
+    ISYM = 0                : 対称性を用いない
+    NELMIN = 4              : SCループの最小回数
+    NELM = 100              : SCループの最大回数
+    EDIFF = 1E-6            : SCループの終了条件
+    LWAVE = .FALSE.         : WAVECARの出力OFF
+    LCHARG = .FALSE.        : CHGCARの出力OFF
+    ALGO = Normal           : blocked-Davidson-iteration scheme
+    PREC = Normal           : 下の表を参照
+
     # MD
-    IBRION = 0　　：MD計算を行う
-    MDALGO = 3　　：Langevin熱浴を使用
-    ISIF = 3　　  ：NpTアンサンブルを使用
-    TEBEG = 300　 ：300Kで開始
-    TEEND = 300　 ：300Kで終了
-    NSW = 50 　　 ：50ステップ計算する
-    POTIM = 1.0　 ：1ステップの間隔は1[fs]
-
-## 5. mdpythonを編集する
-変えるべきは、プログラム上部の「atom_list」「lattice_list」だけです。  
-なので、答えは…
-
-    # bcc
-    import os
-    import math
-    import numpy as np
-
-    # Parameters
-    atom_list = ["W", "Cr", "Fe", "Li"] ← ココ !
-    lattice_list = [3.16469, 2.8839, 2.8665, 3.491] ← ココ !
+    IBRION = 0              : MD実行
+    MDALGO = 3              : Langevin熱浴を使用
+    ISIF = 3                : 原子座標や格子の体積の変化を許可
+    SMASS = -1              : 毎ステップごとに速度をスケーリング
+    TEBEG = 300             : 計算開始時の温度
+    TEEND = 300             : 計算終了時の温度
+    NSW = 100               : タイムステップ数
+    POTIM = 1.0             : 1タイムステップの長さを 1.0 fsに
+    LANGEVIN_GAMMA = 10.0   : 原子のLangevin方程式の弾性係数
+    LANGEVIN_GAMMA_L = 10.0 : 格子のLangevin方程式の弾性係数
 
 
-    print("Select atoms from following: ")
-    for i in range(len(atom_list)):
-        print("{} : {}".format(i, atom_list[i]))
-    atomflag = int(input("Input number : "))
-       :
-       :
-    （省略）
-
-そして、
-
-    # fcc
-    import os
-    import math
-    import numpy as np
-
-    # Parameters
-    atom_list = ["Au", "Ag", "Cu", "Fe", "Al", "Co", "Ca"] ← ココ !
-    lattice_list = [4.7825, 4.0862, 3.614967, 3.5910, 4.04958, 3.548, 5.81] ← ココ !
-
-    print("Select atoms from following: ")
-    for i in range(len(atom_list)):
-        print("{} : {}".format(i, atom_list[i]))
-    atomflag = int(input("Input number : "))
-       :
-       :
-    （省略）
-
-__atom_list は文字列の配列なので " " で括ることを忘れないでください！__
+なお、PRECの詳細は次の通り
+|パラメータ|設定値|
+|:--:|:--:|
+|ENCUT|max(ENMAX)|
+|NGX,Y,Z|3/2×$G_{cut}$|
+|NGXF,YF,ZF|2×NGX|
