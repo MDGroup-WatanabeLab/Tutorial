@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 vaspout = Vasprun("vasprun.xml")
 bandstr = vaspout.get_band_structure(line_mode=True)
-band = BSPlotter(bandstr).get_plot(ylim=[-12,10])
+band = BSPlotter(bandstr).get_plot(ylim=[-20,20])
 
 band.plot()
 
